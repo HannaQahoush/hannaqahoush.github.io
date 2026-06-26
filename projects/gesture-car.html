@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Gesture Car · Hanna Qahoush</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+<style>
+  body { background:#0f1415; color:#dfe3e4; font-family:'Outfit',sans-serif; min-height:100dvh; }
+  .material-symbols-outlined { font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; }
+  .glass { background:rgba(0,50,54,0.4); backdrop-filter:blur(20px); border:1px solid rgba(0,139,148,0.2); }
+  .mono { font-family:'JetBrains Mono',monospace; }
+</style>
+</head>
+<body class="overflow-x-hidden">
+
+<header class="sticky top-0 z-50 bg-[#0f1415]/80 backdrop-blur border-b border-[#3a494a]">
+  <div class="max-w-4xl mx-auto px-4 h-14 flex items-center gap-3">
+    <a href="../index.html" class="flex items-center gap-2 text-[#849495] hover:text-[#e9feff] transition-colors">
+      <span class="material-symbols-outlined text-lg">arrow_back</span>
+      <span class="mono text-xs uppercase tracking-widest">Back to Portfolio</span>
+    </a>
+  </div>
+</header>
+
+<main class="max-w-4xl mx-auto px-4 py-12 space-y-12">
+
+  <div class="space-y-4">
+    <div class="flex flex-wrap items-center gap-3">
+      <span class="mono text-xs text-[#6fd6df] uppercase tracking-widest border border-[#6fd6df]/30 px-3 py-1 rounded-full">ESP32 · C++ · IoT</span>
+      <span class="mono text-xs text-[#849495]">Special Topic In Software Engineering 1</span>
+    </div>
+    <h1 class="text-4xl md:text-5xl font-bold text-[#e9feff] leading-tight">Gesture Car</h1>
+    <p class="text-[#b9caca] text-lg leading-relaxed max-w-2xl">
+      An IoT-powered RC car controlled in real time by hand gestures, using an MPU6050 accelerometer and peer-to-peer ESP-NOW communication between two ESP32 modules.
+    </p>
+  </div>
+
+  <!-- Video placeholder -->
+  <div class="glass rounded-2xl overflow-hidden flex items-center justify-center">
+  <video
+    src="vid/car-vid.mp4"
+    loop
+    controls
+    class="w-auto max-h-[80vh] max-w-full"
+  ></video>
+</div>
+
+  <div class="glass rounded-2xl p-8 space-y-4">
+    <h2 class="mono text-sm text-[#00f5ff] uppercase tracking-widest border-b border-[#3a494a] pb-3">Project Overview</h2>
+    <p class="text-[#b9caca] leading-relaxed">
+      Gesture Car enables real-time wireless control of an ESP32-powered vehicle using hand movements. One ESP32 module reads tilt data from an MPU6050 accelerometer worn by the user, then transmits directional commands via the ESP-NOW protocol to a second ESP32 mounted on the car, which drives four motors accordingly.
+    </p>
+    <p class="text-[#b9caca] leading-relaxed">
+      The project demonstrates embedded systems programming, sensor interfacing, peer-to-peer wireless communication, and motor control — all built without relying on cloud infrastructure.
+    </p>
+  </div>
+
+  <div class="glass rounded-2xl p-8 space-y-4">
+    <h2 class="mono text-sm text-[#00f5ff] uppercase tracking-widest border-b border-[#3a494a] pb-3">Implemented Features</h2>
+    <div class="grid md:grid-cols-2 gap-3">
+      <div class="flex items-start gap-3 p-3 bg-[#1b2021] rounded-xl">
+        <span class="material-symbols-outlined text-[#00f5ff] text-sm mt-0.5">check_circle</span>
+        <div><p class="font-semibold text-sm text-[#dfe3e4]">Gesture Detection</p><p class="text-xs text-[#849495]">Hand tilt captured via MPU6050 accelerometer sensor</p></div>
+      </div>
+      <div class="flex items-start gap-3 p-3 bg-[#1b2021] rounded-xl">
+        <span class="material-symbols-outlined text-[#00f5ff] text-sm mt-0.5">check_circle</span>
+        <div><p class="font-semibold text-sm text-[#dfe3e4]">ESP-NOW Protocol</p><p class="text-xs text-[#849495]">Peer-to-peer wireless communication between ESP32 modules</p></div>
+      </div>
+      <div class="flex items-start gap-3 p-3 bg-[#1b2021] rounded-xl">
+        <span class="material-symbols-outlined text-[#00f5ff] text-sm mt-0.5">check_circle</span>
+        <div><p class="font-semibold text-sm text-[#dfe3e4]">4-Motor Control</p><p class="text-xs text-[#849495]">Real-time directional control (forward, reverse, left, right)</p></div>
+      </div>
+      <div class="flex items-start gap-3 p-3 bg-[#1b2021] rounded-xl">
+        <span class="material-symbols-outlined text-[#00f5ff] text-sm mt-0.5">check_circle</span>
+        <div><p class="font-semibold text-sm text-[#dfe3e4]">Dual-Speed Logic</p><p class="text-xs text-[#849495]">Separate speed levels for turns vs straight movement</p></div>
+      </div>
+      <div class="flex items-start gap-3 p-3 bg-[#1b2021] rounded-xl">
+        <span class="material-symbols-outlined text-[#00f5ff] text-sm mt-0.5">check_circle</span>
+        <div><p class="font-semibold text-sm text-[#dfe3e4]">MAC Binding</p><p class="text-xs text-[#849495]">Secure pairing prevents cross-device interference</p></div>
+      </div>
+      <div class="flex items-start gap-3 p-3 bg-[#1b2021] rounded-xl">
+        <span class="material-symbols-outlined text-[#00f5ff] text-sm mt-0.5">check_circle</span>
+        <div><p class="font-semibold text-sm text-[#dfe3e4]">Serial Debug Output</p><p class="text-xs text-[#849495]">Logs commands and status for real-time debugging</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="glass rounded-2xl p-8 space-y-4">
+    <h2 class="mono text-sm text-[#00f5ff] uppercase tracking-widest border-b border-[#3a494a] pb-3">Tech Stack</h2>
+    <div class="flex flex-wrap gap-2">
+      <span class="px-3 py-1 bg-[#e9feff]/10 text-[#e9feff] border border-[#e9feff]/20 rounded-md text-xs mono">ESP32</span>
+      <span class="px-3 py-1 bg-[#e9feff]/10 text-[#e9feff] border border-[#e9feff]/20 rounded-md text-xs mono">C++</span>
+      <span class="px-3 py-1 bg-[#e9feff]/10 text-[#e9feff] border border-[#e9feff]/20 rounded-md text-xs mono">MPU6050</span>
+      <span class="px-3 py-1 bg-[#e9feff]/10 text-[#e9feff] border border-[#e9feff]/20 rounded-md text-xs mono">ESP-NOW</span>
+      <span class="px-3 py-1 bg-[#e9feff]/10 text-[#e9feff] border border-[#e9feff]/20 rounded-md text-xs mono">Arduino IDE</span>
+    </div>
+  </div>
+
+  <!-- Photos -->
+  <div class="space-y-4">
+    <h2 class="mono text-sm text-[#00f5ff] uppercase tracking-widest">Project Photos</h2>
+    <div class="grid md:grid-cols-2 gap-4">
+      <div class="glass rounded-xl aspect-video flex items-center justify-center"><img src="img/poster.png" alt="Car Photo 2" class="w-full rounded-xl"/></div>
+      <div class="glass rounded-xl aspect-video flex items-center justify-center"><img src="img/c1.png" alt="Car Photo 1" class="w-full rounded-xl"/></div>
+      <div class="glass rounded-xl aspect-video flex items-center justify-center"><img src="img/c2.png" alt="Car Photo 2" class="w-full rounded-xl"/></div>
+      <div class="glass rounded-xl aspect-video flex items-center justify-center"><img src="img/c3.png" alt="Car Photo 3" class="w-full rounded-xl"/></div>
+    </div>
+  </div>
+
+  <div class="text-center py-6 border-t border-[#3a494a]">
+    <p class="text-[#849495] text-sm mono">Final Project · Special Topic In Software Engineering 1</p>
+    <p class="text-[#849495] text-sm mono">Princess Sumaya University for Technology</p>
+  </div>
+
+</main>
+</body>
+</html>

@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Assembly Timing Game · Hanna Qahoush</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      background: #0f1415;
+      color: #dfe3e4;
+      font-family: 'Outfit', sans-serif;
+      min-height: 100dvh;
+    }
+
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+
+    .glass {
+      background: rgba(0, 50, 54, 0.4);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(0, 139, 148, 0.2);
+    }
+
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Terminal-style rating demo */
+    .terminal {
+      background: #0a0f10;
+      border: 1px solid #3a494a;
+      border-radius: 12px;
+      padding: 20px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .t-green {
+      color: #4ade80;
+    }
+
+    .t-cyan {
+      color: #00f5ff;
+    }
+
+    .t-yellow {
+      color: #fbbf24;
+    }
+
+    .t-dim {
+      color: #849495;
+    }
+  </style>
+</head>
+
+<body class="overflow-x-hidden">
+
+  <header class="sticky top-0 z-50 bg-[#0f1415]/80 backdrop-blur border-b border-[#3a494a]">
+    <div class="max-w-4xl mx-auto px-4 h-14 flex items-center gap-3">
+      <a href="../index.html" class="flex items-center gap-2 text-[#849495] hover:text-[#e9feff] transition-colors">
+        <span class="material-symbols-outlined text-lg">arrow_back</span>
+        <span class="mono text-xs uppercase tracking-widest">Back to Portfolio</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 py-12 space-y-12">
+
+    <div class="space-y-4">
+      <div class="flex flex-wrap items-center gap-3">
+        <span
+          class="mono text-xs text-[#6fd6df] uppercase tracking-widest border border-[#6fd6df]/30 px-3 py-1 rounded-full">8086
+          Assembly · Low-Level</span>
+        <span class="mono text-xs text-[#849495]">Computer Organization &amp; Assembly Language</span>
+      </div>
+      <h1 class="text-4xl md:text-5xl font-bold text-[#e9feff] leading-tight">Assembly Timing Game</h1>
+      <p class="text-[#b9caca] text-lg leading-relaxed max-w-2xl">
+        A reaction-based timing game built entirely in 8086 Assembly. The player mentally counts a randomly shown
+        duration, then presses spacebar — and the program rates their accuracy.
+      </p>
+    </div>
+
+    <!-- Terminal mockup -->
+    <div class="terminal">
+      <p class="t-cyan">Welcome to the Timing Guessing Game press [Space] to start !</p>
+      <p class="t-dim mt-2">[ SPACE pressed ]</p>
+      <p class="t-cyan mt-2">The target time: <span class="t-yellow">12</span></p>
+      <p class="text-[#dfe3e4] mt-2">Press space to start the timer !</p>
+      <p class="t-dim">[ SPACE pressed — timer running... ]</p>
+      <p class="text-[#dfe3e4]">[ SPACE pressed — timer stopped ]</p>
+      <p class="text-[#dfe3e4] mt-2">The User's time: <span class="t-yellow">11</span></p>
+      <p class="text-[#dfe3e4]">Difference between guessed time and target time: <span class="t-green">1</span></p>
+      <p class="t-green font-bold mt-2">SUPER</p>
+      <p class="t-dim mt-2">Press enter to try again !</p>
+    </div>
+
+    <div class="glass rounded-2xl p-8 space-y-4">
+      <h2 class="mono text-sm text-[#00f5ff] uppercase tracking-widest border-b border-[#3a494a] pb-3">Project Overview
+      </h2>
+      <p class="text-[#b9caca] leading-relaxed">
+        The game presents the player with a random target time between 0 and 30 seconds. After pressing spacebar to
+        begin, a background timer starts running in the CPU. The player then presses spacebar a second time when they
+        believe the target duration has elapsed. The program calculates the actual elapsed time, compares it to the
+        target, and displays an accuracy rating.
+      </p>
+      <p class="text-[#b9caca] leading-relaxed">
+        The entire program is written in 8086 Assembly using only low-level CPU instructions — no standard libraries.
+        Timing is handled using hardware interrupt loops, and all I/O is done via DOS interrupts.
+      </p>
+    </div>
+
+    <div class="glass rounded-2xl p-8 space-y-4">
+      <h2 class="mono text-sm text-[#00f5ff] uppercase tracking-widest border-b border-[#3a494a] pb-3">Implemented
+        Features</h2>
+      <div class="grid md:grid-cols-2 gap-3">
+        <div class="flex items-start gap-3 p-3 bg-[#1b2021] rounded-xl">
+          <span class="material-symbols-outlined text-[#00f5ff] text-sm mt-0.5">check_circle</span>
+          <div>
+            <p class="font-semibold text-sm text-[#dfe3e4]">Random Time Generation</p>
+            <p class="text-xs text-[#849495]">Target time (0–30s) shown at the start of each round</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3 p-3 bg-[#1b2021] rounded-xl">
+          <span class="material-symbols-outlined text-[#00f5ff] text-sm mt-0.5">check_circle</span>
+          <div>
+            <p class="font-semibold text-sm text-[#dfe3e4]">Background Timer</p>
+            <p class="text-xs text-[#849495]">CPU counting loop starts on first spacebar press</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3 p-3 bg-[#1b2021] rounded-xl">
+          <span class="material-symbols-outlined text-[#00f5ff] text-sm mt-0.5">check_circle</span>
+          <div>
+            <p class="font-semibold text-sm text-[#dfe3e4]">Spacebar Controls</p>
+            <p class="text-xs text-[#849495]">First press starts, second press stops the timer</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3 p-3 bg-[#1b2021] rounded-xl">
+          <span class="material-symbols-outlined text-[#00f5ff] text-sm mt-0.5">check_circle</span>
+          <div>
+            <p class="font-semibold text-sm text-[#dfe3e4]">Accuracy Rating</p>
+            <p class="text-xs text-[#849495]">SUPER / GOOD / TRY HARDER based on how close you were</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3 p-3 bg-[#1b2021] rounded-xl">
+          <span class="material-symbols-outlined text-[#00f5ff] text-sm mt-0.5">check_circle</span>
+          <div>
+            <p class="font-semibold text-sm text-[#dfe3e4]">Replay Function</p>
+            <p class="text-xs text-[#849495]">Press Enter to start a new round with a new target time</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3 p-3 bg-[#1b2021] rounded-xl">
+          <span class="material-symbols-outlined text-[#00f5ff] text-sm mt-0.5">check_circle</span>
+          <div>
+            <p class="font-semibold text-sm text-[#dfe3e4]">Pure Assembly</p>
+            <p class="text-xs text-[#849495]">Entirely written in 8086 Assembly — no higher-level language</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="glass rounded-2xl p-8 space-y-4">
+      <h2 class="mono text-sm text-[#00f5ff] uppercase tracking-widest border-b border-[#3a494a] pb-3">Tech Stack</h2>
+      <div class="flex flex-wrap gap-2">
+        <span class="px-3 py-1 bg-[#e9feff]/10 text-[#e9feff] border border-[#e9feff]/20 rounded-md text-xs mono">8086
+          Assembly</span>
+        <span
+          class="px-3 py-1 bg-[#e9feff]/10 text-[#e9feff] border border-[#e9feff]/20 rounded-md text-xs mono">EMU8086
+          Emulator</span>
+        <span class="px-3 py-1 bg-[#e9feff]/10 text-[#e9feff] border border-[#e9feff]/20 rounded-md text-xs mono">DOS
+          Interrupts</span>
+        <span class="px-3 py-1 bg-[#e9feff]/10 text-[#e9feff] border border-[#e9feff]/20 rounded-md text-xs mono">x86
+          Architecture</span>
+      </div>
+    </div>
+
+    <!-- Screenshots -->
+    <div class="space-y-4">
+      <h2 class="mono text-sm text-[#00f5ff] uppercase tracking-widest">Screenshots</h2>
+      <div class="grid md:grid-rows-3 gap-4">
+        <div class="glass rounded-xl aspect-video flex items-center justify-center"><img src="img/emu (3).png"
+            alt="Welcome Screen" class="w-full rounded-xl" /></div>
+        <div class="glass rounded-xl aspect-video flex items-center justify-center"><img src="img/emu (1).png"
+            alt="Target Time" class="w-full rounded-xl" /></div>
+        <div class="glass rounded-xl aspect-video flex items-center justify-center"><img src="img/emu (2).png"
+            alt="Result" class="w-full rounded-xl" /></div>
+      </div>
+    </div>
+
+    <!-- Source Code -->
+    <div class="glass rounded-2xl p-8 space-y-4">
+      <div class="flex items-center justify-between border-b border-[#3a494a] pb-3">
+        <h2 class="mono text-sm text-[#00f5ff] uppercase tracking-widest">Source Code</h2>
+        <button onclick="copyCode()"
+          class="mono text-xs text-[#849495] hover:text-[#e9feff] transition-colors flex items-center gap-1">
+          <span class="material-symbols-outlined text-sm">content_copy</span>
+          <span id="copy-label">Copy</span>
+        </button>
+      </div>
+      <pre class="overflow-x-auto text-xs leading-relaxed text-[#b9caca]"><code id="asm-code">org 100h   
+
+.data   
+randVal db ? 
+userTime db ?
+str0 db "Welcome to the Timing Guessing Game press [Space] to start !$"
+str1 db "The target time: $"
+str2 db "The User's time: $"
+str3 db "Difference between guessed time and target time: $" 
+str4 db "SUPER$"
+str5 db "GOOD$"
+str6 db "TRY HARDER NEXT TIME$"
+str7 db "Press enter to try again !$"
+str8 db "Press space to start the timer !$"
+startTime dw ?
+endTime dw ?
+diff db ? 
+
+.code
+mov ax, @data
+mov ds, ax
+
+main:  
+    mov dx, offset str0      ; print welcome
+    mov ah, 9
+    int 21h  
+    call newline
+    
+Start_Game:  
+    mov ah, 1  
+    int 21h    
+    cmp al, 20h              ; compare entered value with 20h (ASCII for space)    
+    JE Print_ranVal  
+    JMP Start_Game  
+
+Print_ranVal:
+    call newline
+    mov dx, offset str1
+    mov ah, 9
+    int 21h                
+    mov ah, 0                ; get system time to generate random number (1-30)
+    int 1Ah                  ; time saved as CX:DX = clock ticks since midnight
+    mov ax, dx               ; use low bits — they change faster, more "random"
+    mov dx, 0                
+    mov bx, 30               
+    div bx                   ; ax = quotient, dx = remainder (0-29)
+    inc dx                   ; range becomes 1-30
+    mov randVal, dl          
+    mov al, randVal
+    call print_number
+    call newline
+    
+TimerStartWait: 
+    mov dx, offset str8
+    mov ah, 9
+    int 21h
+    mov ah, 1  
+    int 21h                  
+    cmp al, 20h
+    JNE TimerStartWait
+
+StartTimer:                            
+    mov ah, 0
+    int 1Ah
+    mov startTime, dx                         
+    mov ah, 1  
+    int 21h                  
+    cmp al, 20h
+    JNE StartTimer
+
+StopTimer:
+    mov ah, 0
+    int 1Ah        
+    mov endTime, dx          
+    mov ax, endTime
+    sub ax, startTime        ; ax = tick difference                              
+    mov dx, 0                
+    mov cx, 18             
+    div cx                   ; convert ticks to seconds (~18 ticks per second)
+    
+store_time:
+    mov userTime, al         
+    sub al, randVal
+    JNS positive_diff
+    neg al
+    
+positive_diff:
+    mov diff, al
+    call newline
+    mov dx, offset str2
+    mov ah, 9
+    int 21h
+    mov al, userTime
+    call print_number
+    call newline
+    mov dx, offset str3
+    mov ah, 9
+    int 21h
+    mov al, diff
+    call print_number
+    call newline
+    cmp diff, 2
+    JLE super
+    cmp diff, 5
+    JLE good
+    
+tryharder:
+    mov dx, offset str6
+    JMP print_result
+    
+good:
+    mov dx, offset str5
+    JMP print_result
+    
+super:
+    mov dx, offset str4
+    
+print_result:
+    mov ah, 9
+    int 21h
+    
+EndGame:
+    call newline
+    mov dx, offset str7
+    mov ah, 9
+    int 21h
+    mov ah, 1
+    int 21h
+    cmp al, 0Dh
+    JE Print_ranVal          
+    
+done:
+    ret
+
+; ── Helper Procedures ──────────────────────────────
+
+newline:
+    mov dl, 0ah
+    mov ah, 02h
+    int 21h
+    mov dl, 0dh
+    mov ah, 02h
+    int 21h
+    ret
+
+print_number: 
+    cmp al, 10
+    JL print_one_digit
+    mov ah, 0
+    mov bl, 10
+    div bl
+    add ax, 3030h
+    mov dl, al
+    mov dh, ah
+    mov ah, 2
+    int 21h
+    mov dl, dh
+    int 21h
+    ret
+    
+print_one_digit:
+    add al, '0'
+    mov dl, al
+    mov ah, 2
+    int 21h
+    ret</code></pre>
+    </div>
+
+    <script>
+      function copyCode() {
+        const code = document.getElementById('asm-code').innerText;
+        navigator.clipboard.writeText(code).then(() => {
+          const label = document.getElementById('copy-label');
+          label.textContent = 'Copied!';
+          setTimeout(() => label.textContent = 'Copy', 2000);
+        });
+      }
+    </script>
+
+    <div class="text-center py-6 border-t border-[#3a494a]">
+      <p class="text-[#849495] text-sm mono">Final Project · Computer Organization and Assembly Language</p>
+      <p class="text-[#849495] text-sm mono">Princess Sumaya University for Technology</p>
+    </div>
+
+  </main>
+</body>
+
+</html>

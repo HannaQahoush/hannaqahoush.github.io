@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ILLRMS Analysis · Hanna Qahoush</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+<style>
+  body { background:#0f1415; color:#dfe3e4; font-family:'Outfit',sans-serif; min-height:100dvh; }
+  .material-symbols-outlined { font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; }
+  .glass { background:rgba(0,50,54,0.4); backdrop-filter:blur(20px); border:1px solid rgba(0,139,148,0.2); }
+  .mono { font-family:'JetBrains Mono',monospace; }
+  table { border-collapse: collapse; width: 100%; }
+  th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid #3a494a; font-size: 13px; }
+  th { color: #00f5ff; font-family:'JetBrains Mono',monospace; font-size:11px; text-transform:uppercase; letter-spacing:0.08em; background:#0a0f10; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(0,245,255,0.03); }
+</style>
+</head>
+<body class="overflow-x-hidden">
+
+<header class="sticky top-0 z-50 bg-[#0f1415]/80 backdrop-blur border-b border-[#3a494a]">
+  <div class="max-w-4xl mx-auto px-4 h-14 flex items-center gap-3">
+    <a href="../index.html" class="flex items-center gap-2 text-[#849495] hover:text-[#e9feff] transition-colors">
+      <span class="material-symbols-outlined text-lg">arrow_back</span>
+      <span class="mono text-xs uppercase tracking-widest">Back to Portfolio</span>
+    </a>
+  </div>
+</header>
+
+<main class="max-w-4xl mx-auto px-4 py-12 space-y-12">
+
+  <!-- Hero -->
+  <div class="space-y-4">
+    <div class="flex flex-wrap items-center gap-3">
+      <span class="mono text-xs text-[#6fd6df] uppercase tracking-widest border border-[#6fd6df]/30 px-3 py-1 rounded-full">Requirements · SRS</span>
+      <span class="mono text-xs text-[#849495]">Software Requirements Analysis — 13325</span>
+    </div>
+    <h1 class="text-4xl md:text-5xl font-bold text-[#e9feff] leading-tight">ILLRMS Analysis</h1>
+    <p class="text-[#b9caca] text-lg leading-relaxed max-w-2xl">
+      Software requirements analysis for an Integrated Library &amp; Learning Resource Management System — covering requirement extraction, stakeholder identification, MoSCoW prioritization, dependency analysis, and use case modeling.
+    </p>
+  </div>
+
+  <!-- Overview -->
+  <div class="glass rounded-2xl p-8 space-y-4">
+    <h2 class="mono text-sm text-[#00f5ff] uppercase tracking-widest border-b border-[#3a494a] pb-3">Project Overview</h2>
+    <p class="text-[#b9caca] leading-relaxed">
+      ILLRMS is a proposed university library system that allows students, faculty members, and library clerks to manage academic resource borrowing through an online portal. The system handles user authentication, loan eligibility validation, financial due tracking, and borrowing season control — all while enforcing university academic integrity policies.
+    </p>
+    <div class="grid md:grid-cols-2 gap-3 pt-2">
+      <div class="p-3 bg-[#1b2021] rounded-xl space-y-1">
+        <p class="text-xs text-[#849495] mono uppercase tracking-widest">Direct Stakeholders</p>
+        <p class="text-sm text-[#dfe3e4]">Students, Faculty Members, Library Clerks, Library Administrator, Lecturers</p>
+      </div>
+      <div class="p-3 bg-[#1b2021] rounded-xl space-y-1">
+        <p class="text-xs text-[#849495] mono uppercase tracking-widest">Indirect Stakeholders</p>
+        <p class="text-sm text-[#dfe3e4]">University Central Accounting System, University Registration System, Central Catalog</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Functional Requirements -->
+  <div class="glass rounded-2xl p-8 space-y-4">
+    <h2 class="mono text-sm text-[#00f5ff] uppercase tracking-widest border-b border-[#3a494a] pb-3">Functional Requirements</h2>
+    <div class="overflow-x-auto rounded-xl border border-[#3a494a]">
+      <table>
+        <thead><tr><th>ID</th><th>Requirement</th><th>Priority</th></tr></thead>
+        <tbody class="text-[#b9caca]">
+          <tr><td class="mono text-[#6fd6df]">FR1</td><td>Support students and faculty in accessing academic resources via portal or library clerk</td><td><span class="mono text-xs text-[#4ade80]">Must Do</span></td></tr>
+          <tr><td class="mono text-[#6fd6df]">FR2</td><td>Authenticate system users</td><td><span class="mono text-xs text-[#4ade80]">Must Do</span></td></tr>
+          <tr><td class="mono text-[#6fd6df]">FR3</td><td>Allow users to register with full name, university ID, date of birth, and password</td><td><span class="mono text-xs text-[#4ade80]">Must Do</span></td></tr>
+          <tr><td class="mono text-[#6fd6df]">FR4</td><td>Automatically set university ID as primary username</td><td><span class="mono text-xs text-[#4ade80]">Must Do</span></td></tr>
+          <tr><td class="mono text-[#6fd6df]">FR5</td><td>Allow manual registration through a library clerk via paper-based forms</td><td><span class="mono text-xs text-[#fbbf24]">Should Do</span></td></tr>
+          <tr><td class="mono text-[#6fd6df]">FR6</td><td>Allow users to add a book or digital resource to their Current Loans list</td><td><span class="mono text-xs text-[#4ade80]">Must Do</span></td></tr>
+          <tr><td class="mono text-[#6fd6df]">FR7</td><td>Allow loan requests to be initiated by a logged-in user</td><td><span class="mono text-xs text-[#4ade80]">Must Do</span></td></tr>
+          <tr><td class="mono text-[#6fd6df]">FR8</td><td>Allow loan requests to be initiated by a library clerk using a student ID</td><td><span class="mono text-xs text-[#4ade80]">Must Do</span></td></tr>
+          <tr><td class="mono text-[#6fd6df]">FR9</td><td>Process loan request using resource ID and preferred branch location</td><td><span class="mono text-xs text-[#4ade80]">Must Do</span></td></tr>
+          <tr><td class="mono text-[#6fd6df]">FR10</td><td>Perform loan eligibility validation before approving a loan</td><td><span class="mono text-xs text-[#4ade80]">Must Do</span></td></tr>
+          <tr><td class="mono text-[#6fd6df]">FR11</td><td>Ensure resource is available in the central catalog</td><td><span class="mono text-xs text-[#4ade80]">Must Do</span></td></tr>
+          <tr><td class="mono text-[#6fd6df]">FR12</td><td>Verify the student has no outstanding library fines or overdue penalties</td><td><span class="mono text-xs text-[#4ade80]">Must Do</span></td></tr>
+          <tr><td class="mono text-[#6fd6df]">FR13</td><td>Verify student is enrolled in the department that owns the resource</td><td><span class="mono text-xs text-[#fbbf24]">Should Do</span></td></tr>
+          <tr><td class="mono text-[#6fd6df]">FR14</td><td>Ensure no Debit status for High-Value Item loans</td><td><span class="mono text-xs text-[#4ade80]">Must Do</span></td></tr>
+          <tr><td class="mono text-[#6fd6df]">FR15</td><td>Allow library clerks to perform authorized overrides</td><td><span class="mono text-xs text-[#fbbf24]">Should Do</span></td></tr>
+          <tr><td class="mono text-[#6fd6df]">FR16</td><td>Allow clerk to bypass Department Enrollment or Fine Clearance with faculty waiver</td><td><span class="mono text-xs text-[#fbbf24]">Should Do</span></td></tr>
+          <tr><td class="mono text-[#6fd6df]">FR17</td><td>Trigger notification to clerk confirming violation of standard rules</td><td><span class="mono text-xs text-[#fbbf24]">Should Do</span></td></tr>
+          <tr><td class="mono text-[#6fd6df]">FR18</td><td>Provide confirmation if a loan is successful</td><td><span class="mono text-xs text-[#4ade80]">Must Do</span></td></tr>
+          <tr><td class="mono text-[#6fd6df]">FR19</td><td>Display specific error message if loan request is unsuccessful</td><td><span class="mono text-xs text-[#4ade80]">Must Do</span></td></tr>
+          <tr><td class="mono text-[#6fd6df]">FR20</td><td>Allow users to view their current loan list</td><td><span class="mono text-xs text-[#4ade80]">Must Do</span></td></tr>
+          <tr><td class="mono text-[#6fd6df]">FR21</td><td>Allow users to select a Return/Withdraw option for specific items</td><td><span class="mono text-xs text-[#4ade80]">Must Do</span></td></tr>
+          <tr><td class="mono text-[#6fd6df]">FR22</td><td>Update status and display refreshed list when an item is selected</td><td><span class="mono text-xs text-[#4ade80]">Must Do</span></td></tr>
+          <tr><td class="mono text-[#6fd6df]">FR23</td><td>Prevent return of Linked Resource for active group project without clerk override</td><td><span class="mono text-xs text-[#fbbf24]">Should Do</span></td></tr>
+          <tr><td class="mono text-[#6fd6df]">FR24</td><td>Provide real-time access to users' financial dues</td><td><span class="mono text-xs text-[#4ade80]">Must Do</span></td></tr>
+          <tr><td class="mono text-[#6fd6df]">FR25</td><td>Allow Library Administrator to set borrowing season start and end dates</td><td><span class="mono text-xs text-[#4ade80]">Must Do</span></td></tr>
+          <tr><td class="mono text-[#6fd6df]">FR26</td><td>Automatically cease all checkout operations once deadline passes</td><td><span class="mono text-xs text-[#4ade80]">Must Do</span></td></tr>
+          <tr><td class="mono text-[#6fd6df]">FR27</td><td>Allow lecturers to view students who borrowed materials for their courses</td><td><span class="mono text-xs text-[#fbbf24]">Should Do</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Non-Functional Requirements -->
+  <div class="glass rounded-2xl p-8 space-y-4">
+    <h2 class="mono text-sm text-[#00f5ff] uppercase tracking-widest border-b border-[#3a494a] pb-3">Non-Functional Requirements</h2>
+    <div class="overflow-x-auto rounded-xl border border-[#3a494a]">
+      <table>
+        <thead><tr><th>ID</th><th>Requirement</th><th>Priority</th></tr></thead>
+        <tbody class="text-[#b9caca]">
+          <tr><td class="mono text-[#6fd6df]">NFR1</td><td>Full functionality across all common web browsers</td><td><span class="mono text-xs text-[#4ade80]">Must Do</span></td></tr>
+          <tr><td class="mono text-[#6fd6df]">NFR2</td><td>Accessible through various devices</td><td><span class="mono text-xs text-[#fbbf24]">Should Do</span></td></tr>
+          <tr><td class="mono text-[#6fd6df]">NFR3</td><td>Update financial data in real time</td><td><span class="mono text-xs text-[#fbbf24]">Should Do</span></td></tr>
+          <tr><td class="mono text-[#6fd6df]">NFR4</td><td>High level of data security to maintain user trust</td><td><span class="mono text-xs text-[#4ade80]">Must Do</span></td></tr>
+          <tr><td class="mono text-[#6fd6df]">NFR5</td><td>Full enforcement of borrowing rules and restrictions to support academic integrity</td><td><span class="mono text-xs text-[#4ade80]">Must Do</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- MoSCoW -->
+  <div class="glass rounded-2xl p-8 space-y-4">
+    <h2 class="mono text-sm text-[#00f5ff] uppercase tracking-widest border-b border-[#3a494a] pb-3">MoSCoW Prioritization</h2>
+    <div class="space-y-3">
+      <div class="p-4 bg-[#1b2021] rounded-xl space-y-2">
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-[#4ade80]"></span>
+          <p class="font-semibold text-sm text-[#dfe3e4]">Must Do — High Priority</p>
+        </div>
+        <p class="text-xs text-[#849495]">User authentication &amp; registration (FR1–FR4), borrowing &amp; loan processing (FR6–FR12, FR14, FR18–FR19), financial &amp; administrative control (FR24–FR26), security &amp; reliability (NFR1, NFR4, NFR5).</p>
+      </div>
+      <div class="p-4 bg-[#1b2021] rounded-xl space-y-2">
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-[#fbbf24]"></span>
+          <p class="font-semibold text-sm text-[#dfe3e4]">Should Do — Medium Priority</p>
+        </div>
+        <p class="text-xs text-[#849495]">Additional validation (FR13, FR23), clerk override &amp; exception handling (FR15–FR17), accessibility &amp; performance (NFR2, NFR3), manual &amp; assisted operations (FR5, FR27).</p>
+      </div>
+      <div class="p-4 bg-[#1b2021] rounded-xl space-y-2">
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-[#849495]"></span>
+          <p class="font-semibold text-sm text-[#dfe3e4]">Could Do — Low Priority</p>
+        </div>
+        <p class="text-xs text-[#849495]">None — all identified requirements contribute meaningfully to the system.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Use Case Diagram -->
+  <div class="space-y-4">
+    <h2 class="mono text-sm text-[#00f5ff] uppercase tracking-widest">Use Case Diagram</h2>
+    <div class="bg-white rounded-2xl overflow-hidden flex items-center justify-center p-4">
+      <img src="img/ILLRMS usecase.png" alt="ILLRMS Use Case Diagram" class="max-w-full rounded-xl"/>
+    </div>
+  </div>
+
+  <!-- Diagrams -->
+  <div class="space-y-4">
+    <h2 class="mono text-sm text-[#00f5ff] uppercase tracking-widest">Diagrams &amp; Analysis</h2>
+    <div class="grid md:grid-cols-2 gap-4">
+      <div class="glass rounded-xl overflow-hidden">
+        <img src="img/ILLRMS1.png" alt="ILLRMS Diagram 1" class="w-full object-cover"/>
+      </div>
+      <div class="glass rounded-xl overflow-hidden">
+        <img src="img/ILLRMS2.png" alt="ILLRMS Diagram 2" class="w-full object-cover"/>
+      </div>
+      <div class="glass rounded-xl overflow-hidden">
+        <img src="img/ILLRMS3.png" alt="ILLRMS Diagram 3" class="w-full object-cover"/>
+      </div>
+      <div class="glass rounded-xl overflow-hidden">
+        <img src="img/ILLRMS4.png" alt="ILLRMS Diagram 4" class="w-full object-cover"/>
+      </div>
+      <div class="glass rounded-xl overflow-hidden">
+        <img src="img/ILLRMS5.png" alt="ILLRMS Diagram 5" class="w-full object-cover"/>
+      </div>
+      <div class="glass rounded-xl overflow-hidden">
+        <img src="img/ILLRMS6.png" alt="ILLRMS Diagram 6" class="w-full object-cover"/>
+      </div>
+      <div class="glass rounded-xl overflow-hidden">
+        <img src="img/ILLRMS7.png" alt="ILLRMS Diagram 7" class="w-full object-cover"/>
+      </div>
+      <div class="glass rounded-xl overflow-hidden">
+        <img src="img/ILLRMS8.png" alt="ILLRMS Diagram 8" class="w-full object-cover"/>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tech Stack -->
+  <div class="glass rounded-2xl p-8 space-y-4">
+    <h2 class="mono text-sm text-[#00f5ff] uppercase tracking-widest border-b border-[#3a494a] pb-3">Tools Used</h2>
+    <div class="flex flex-wrap gap-2">
+      <span class="px-3 py-1 bg-[#e9feff]/10 text-[#e9feff] border border-[#e9feff]/20 rounded-md text-xs mono">Requirements Engineering</span>
+      <span class="px-3 py-1 bg-[#e9feff]/10 text-[#e9feff] border border-[#e9feff]/20 rounded-md text-xs mono">MoSCoW Prioritization</span>
+      <span class="px-3 py-1 bg-[#e9feff]/10 text-[#e9feff] border border-[#e9feff]/20 rounded-md text-xs mono">Dependency Analysis</span>
+      <span class="px-3 py-1 bg-[#e9feff]/10 text-[#e9feff] border border-[#e9feff]/20 rounded-md text-xs mono">Use Case Modeling</span>
+      <span class="px-3 py-1 bg-[#e9feff]/10 text-[#e9feff] border border-[#e9feff]/20 rounded-md text-xs mono">draw.io</span>
+    </div>
+  </div>
+
+  <div class="text-center py-6 border-t border-[#3a494a]">
+    <p class="text-[#849495] text-sm mono">Final Project · Software Requirements Analysis — 13325</p>
+    <p class="text-[#849495] text-sm mono">Princess Sumaya University for Technology</p>
+  </div>
+
+</main>
+</body>
+</html>

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mini Query Engine · Hanna Qahoush</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+<style>
+  body { background:#0f1415; color:#dfe3e4; font-family:'Outfit',sans-serif; min-height:100dvh; }
+  .material-symbols-outlined { font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; }
+  .glass { background:rgba(0,50,54,0.4); backdrop-filter:blur(20px); border:1px solid rgba(0,139,148,0.2); }
+  .mono { font-family:'JetBrains Mono',monospace; }
+  .terminal { background:#0a0f10; border:1px solid #3a494a; border-radius:12px; padding:20px; font-family:'JetBrains Mono',monospace; font-size:13px; line-height:1.8; overflow-x:auto; }
+  .t-green { color:#4ade80; }
+  .t-cyan { color:#00f5ff; }
+  .t-yellow { color:#fbbf24; }
+  .t-dim { color:#849495; }
+  .t-red { color:#f87171; }
+  table { border-collapse: collapse; width: 100%; }
+  th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid #3a494a; font-size: 13px; }
+  th { color: #00f5ff; font-family:'JetBrains Mono',monospace; font-size:11px; text-transform:uppercase; letter-spacing:0.08em; background:#0a0f10; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(0,245,255,0.03); }
+</style>
+</head>
+<body class="overflow-x-hidden">
+
+<header class="sticky top-0 z-50 bg-[#0f1415]/80 backdrop-blur border-b border-[#3a494a]">
+  <div class="max-w-4xl mx-auto px-4 h-14 flex items-center gap-3">
+    <a href="../index.html" class="flex items-center gap-2 text-[#849495] hover:text-[#e9feff] transition-colors">
+      <span class="material-symbols-outlined text-lg">arrow_back</span>
+      <span class="mono text-xs uppercase tracking-widest">Back to Portfolio</span>
+    </a>
+  </div>
+</header>
+
+<main class="max-w-4xl mx-auto px-4 py-12 space-y-12">
+
+  <!-- Hero -->
+  <div class="space-y-4">
+    <div class="flex flex-wrap items-center gap-3">
+      <span class="mono text-xs text-[#6fd6df] uppercase tracking-widest border border-[#6fd6df]/30 px-3 py-1 rounded-full">Java · Databases</span>
+      <span class="mono text-xs text-[#849495]">Database Management Systems</span>
+    </div>
+    <h1 class="text-4xl md:text-5xl font-bold text-[#e9feff] leading-tight">Mini Query Execution Engine</h1>
+    <p class="text-[#b9caca] text-lg leading-relaxed max-w-2xl">
+      A custom SQL query execution engine built in Java that simulates how a database management system processes queries internally, using an iterator-based pipeline model to evaluate and compare three join algorithms.
+    </p>
+  </div>
+
+  <!-- Terminal: sample query output -->
+  <div class="terminal">
+    <p class="t-dim">$ run query</p>
+    <p class="t-cyan mt-1">SELECT A.id, A.value, B.salary FROM A, B WHERE A.id = B.id AND A.value &gt; 150</p>
+    <p class="t-dim mt-2">── Nested Loop Join ──────────────────────</p>
+    <p class="text-[#dfe3e4]">Rows returned  : <span class="t-yellow">2,510</span></p>
+    <p class="text-[#dfe3e4]">Time           : <span class="t-red">28 ms</span></p>
+    <p class="text-[#dfe3e4]">Block accesses : <span class="t-red">2,511,000</span></p>
+    <p class="t-dim mt-2">── Hash Join ─────────────────────────────</p>
+    <p class="text-[#dfe3e4]">Rows returned  : <span class="t-yellow">2,510</span></p>
+    <p class="text-[#dfe3e4]">Time           : <span class="t-green">3 ms</span></p>
+    <p class="text-[#dfe3e4]">Block accesses : <span class="t-green">2,000</span></p>
+    <p class="t-dim mt-2">── Merge Join ────────────────────────────</p>
+    <p class="text-[#dfe3e4]">Rows returned  : <span class="t-yellow">2,510</span></p>
+    <p class="text-[#dfe3e4]">Time           : <span class="t-green">1 ms</span></p>
+    <p class="text-[#dfe3e4]">Block accesses : <span class="t-yellow">15,216</span></p>
+  </div>
+
+  <!-- Overview -->
+  <div class="glass rounded-2xl p-8 space-y-4">
+    <h2 class="mono text-sm text-[#00f5ff] uppercase tracking-widest border-b border-[#3a494a] pb-3">Project Overview</h2>
+    <p class="text-[#b9caca] leading-relaxed">
+      The engine follows the iterator-based model — a pipeline where each operator processes tuples one at a time and passes results to the next operator in the chain. Every operator implements a single <code class="mono text-xs bg-[#1b2021] px-1.5 py-0.5 rounded text-[#6fd6df]">getNextTuple()</code> interface method, keeping the architecture modular and composable.
+    </p>
+    <p class="text-[#b9caca] leading-relaxed">
+      The engine parses a SQL query, builds an operator tree (Scan → Selection → Join → Projection), executes it, and reports execution time, block accesses, and row count for all three join algorithms simultaneously.
+    </p>
+  </div>
+
+  <!-- Pipeline diagram -->
+  <div class="glass rounded-2xl p-8 space-y-4">
+    <h2 class="mono text-sm text-[#00f5ff] uppercase tracking-widest border-b border-[#3a494a] pb-3">Operator Pipeline</h2>
+    <p class="text-[#849495] text-sm mb-4">Example: <span class="text-[#dfe3e4]">WHERE A.id = B.id AND A.value &gt; 100 AND B.salary &gt; 80000</span></p>
+    <div class="flex flex-col items-center gap-2">
+      <div class="w-full max-w-xs text-center py-2.5 px-4 bg-[#1b2021] border border-[#00f5ff]/30 rounded-xl mono text-sm text-[#00f5ff]">Projection</div>
+      <span class="material-symbols-outlined text-[#3a494a]">arrow_downward</span>
+      <div class="w-full max-w-xs text-center py-2.5 px-4 bg-[#1b2021] border border-[#6fd6df]/30 rounded-xl mono text-sm text-[#6fd6df]">Join (NLJ / Hash / Merge)</div>
+      <div class="flex gap-6 w-full max-w-xs justify-center">
+        <span class="material-symbols-outlined text-[#3a494a]">arrow_downward</span>
+        <span class="material-symbols-outlined text-[#3a494a]">arrow_downward</span>
+      </div>
+      <div class="grid grid-cols-2 gap-4 w-full max-w-xs">
+        <div class="text-center py-2.5 px-3 bg-[#1b2021] border border-[#849495]/20 rounded-xl mono text-xs text-[#849495]">Selection (A)</div>
+        <div class="text-center py-2.5 px-3 bg-[#1b2021] border border-[#849495]/20 rounded-xl mono text-xs text-[#849495]">Selection (B)</div>
+      </div>
+      <div class="flex gap-6 w-full max-w-xs justify-center">
+        <span class="material-symbols-outlined text-[#3a494a]">arrow_downward</span>
+        <span class="material-symbols-outlined text-[#3a494a]">arrow_downward</span>
+      </div>
+      <div class="grid grid-cols-2 gap-4 w-full max-w-xs">
+        <div class="text-center py-2.5 px-3 bg-[#1b2021] border border-[#849495]/20 rounded-xl mono text-xs text-[#849495]">Scan (A.csv)</div>
+        <div class="text-center py-2.5 px-3 bg-[#1b2021] border border-[#849495]/20 rounded-xl mono text-xs text-[#849495]">Scan (B.csv)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Code Components -->
+  <div class="glass rounded-2xl p-8 space-y-4">
+    <h2 class="mono text-sm text-[#00f5ff] uppercase tracking-widest border-b border-[#3a494a] pb-3">Code Components</h2>
+    <div class="grid md:grid-cols-2 gap-3">
+      <div class="flex items-start gap-3 p-3 bg-[#1b2021] rounded-xl">
+        <span class="material-symbols-outlined text-[#00f5ff] text-sm mt-0.5">check_circle</span>
+        <div><p class="font-semibold text-sm text-[#dfe3e4]">Main</p><p class="text-xs text-[#849495]">Entry point — receives SQL, runs all three join algorithms and prints results</p></div>
+      </div>
+      <div class="flex items-start gap-3 p-3 bg-[#1b2021] rounded-xl">
+        <span class="material-symbols-outlined text-[#00f5ff] text-sm mt-0.5">check_circle</span>
+        <div><p class="font-semibold text-sm text-[#dfe3e4]">Parser</p><p class="text-xs text-[#849495]">Extracts projected columns and up to one filter condition per table</p></div>
+      </div>
+      <div class="flex items-start gap-3 p-3 bg-[#1b2021] rounded-xl">
+        <span class="material-symbols-outlined text-[#00f5ff] text-sm mt-0.5">check_circle</span>
+        <div><p class="font-semibold text-sm text-[#dfe3e4]">QueryPlanner</p><p class="text-xs text-[#849495]">Builds the operator chain and reports rows, time, and block accesses</p></div>
+      </div>
+      <div class="flex items-start gap-3 p-3 bg-[#1b2021] rounded-xl">
+        <span class="material-symbols-outlined text-[#00f5ff] text-sm mt-0.5">check_circle</span>
+        <div><p class="font-semibold text-sm text-[#dfe3e4]">Scan</p><p class="text-xs text-[#849495]">Reads one tuple at a time from a CSV file</p></div>
+      </div>
+      <div class="flex items-start gap-3 p-3 bg-[#1b2021] rounded-xl">
+        <span class="material-symbols-outlined text-[#00f5ff] text-sm mt-0.5">check_circle</span>
+        <div><p class="font-semibold text-sm text-[#dfe3e4]">Selection</p><p class="text-xs text-[#849495]">Filters tuples that satisfy a condition before passing them to the join</p></div>
+      </div>
+      <div class="flex items-start gap-3 p-3 bg-[#1b2021] rounded-xl">
+        <span class="material-symbols-outlined text-[#00f5ff] text-sm mt-0.5">check_circle</span>
+        <div><p class="font-semibold text-sm text-[#dfe3e4]">Projection</p><p class="text-xs text-[#849495]">Sits at the top — outputs only the columns requested in SELECT</p></div>
+      </div>
+      <div class="flex items-start gap-3 p-3 bg-[#1b2021] rounded-xl">
+        <span class="material-symbols-outlined text-[#00f5ff] text-sm mt-0.5">check_circle</span>
+        <div><p class="font-semibold text-sm text-[#dfe3e4]">NestedLoopJoin</p><p class="text-xs text-[#849495]">Loads right relation into ArrayList, scans all right tuples per left tuple — O(N×M)</p></div>
+      </div>
+      <div class="flex items-start gap-3 p-3 bg-[#1b2021] rounded-xl">
+        <span class="material-symbols-outlined text-[#00f5ff] text-sm mt-0.5">check_circle</span>
+        <div><p class="font-semibold text-sm text-[#dfe3e4]">HashJoin</p><p class="text-xs text-[#849495]">Builds a HashMap from right relation, O(1) lookup per left tuple — O(N+M)</p></div>
+      </div>
+      <div class="flex items-start gap-3 p-3 bg-[#1b2021] rounded-xl">
+        <span class="material-symbols-outlined text-[#00f5ff] text-sm mt-0.5">check_circle</span>
+        <div><p class="font-semibold text-sm text-[#dfe3e4]">MergeJoin</p><p class="text-xs text-[#849495]">Sorts both relations then merges with two pointers — O(N log N + M log M)</p></div>
+      </div>
+      <div class="flex items-start gap-3 p-3 bg-[#1b2021] rounded-xl">
+        <span class="material-symbols-outlined text-[#00f5ff] text-sm mt-0.5">check_circle</span>
+        <div><p class="font-semibold text-sm text-[#dfe3e4]">Tuple</p><p class="text-xs text-[#849495]">Represents a single record; implements Comparable to support sorting by id</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dataset -->
+  <div class="glass rounded-2xl p-8 space-y-4">
+    <h2 class="mono text-sm text-[#00f5ff] uppercase tracking-widest border-b border-[#3a494a] pb-3">Dataset</h2>
+    <p class="text-[#b9caca] leading-relaxed text-sm">Two CSV files of 10,000 records each with randomly distributed data. Block size set to 1024 bytes (~10 tuples per block, unspanned format).</p>
+    <div class="overflow-x-auto rounded-xl border border-[#3a494a]">
+      <table>
+        <thead><tr><th>File</th><th>Rows</th><th>Row Size</th><th>Block Size</th><th>Columns</th></tr></thead>
+        <tbody class="text-[#b9caca]">
+          <tr><td class="mono text-[#6fd6df]">A.csv</td><td>10,000</td><td>100 B</td><td>1024 B</td><td>id (PK), value (float 1–200), name (string)</td></tr>
+          <tr><td class="mono text-[#6fd6df]">B.csv</td><td>10,000</td><td>100 B</td><td>1024 B</td><td>id (PK), salary (float 30K–120K), department (string)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Results -->
+  <div class="glass rounded-2xl p-8 space-y-6">
+    <h2 class="mono text-sm text-[#00f5ff] uppercase tracking-widest border-b border-[#3a494a] pb-3">Experimental Results</h2>
+
+    <div class="space-y-2">
+      <h3 class="text-sm font-semibold text-[#dfe3e4]">No Filter</h3>
+      <p class="mono text-xs text-[#849495]">SELECT A.id, A.value, B.salary FROM A, B WHERE A.id = B.id</p>
+      <div class="overflow-x-auto rounded-xl border border-[#3a494a]">
+        <table>
+          <thead><tr><th>Algorithm</th><th>Time (ms)</th><th>Block Accesses</th><th>Rows</th></tr></thead>
+          <tbody class="text-[#b9caca]">
+            <tr><td>Nested Loop Join</td><td class="t-red">329</td><td class="t-red">10,001,000</td><td>10,000</td></tr>
+            <tr><td>Hash Join</td><td class="t-green">9</td><td class="t-green">2,000</td><td>10,000</td></tr>
+            <tr><td>Merge Join</td><td class="t-green">3</td><td class="t-yellow">23,930</td><td>10,000</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="space-y-2">
+      <h3 class="text-sm font-semibold text-[#dfe3e4]">Filter on A only</h3>
+      <div class="overflow-x-auto rounded-xl border border-[#3a494a]">
+        <table>
+          <thead><tr><th>Filter</th><th>Algorithm</th><th>Time (ms)</th><th>Block Accesses</th><th>Rows</th></tr></thead>
+          <tbody class="text-[#b9caca]">
+            <tr><td rowspan="3" class="mono text-xs text-[#849495] align-top pt-3">A.value &gt; 50</td><td>Nested Loop Join</td><td class="t-red">129</td><td class="t-red">7,498,000</td><td>7,497</td></tr>
+            <tr><td>Hash Join</td><td class="t-green">10</td><td class="t-green">2,000</td><td>7,497</td></tr>
+            <tr><td>Merge Join</td><td class="t-green">1</td><td class="t-yellow">20,878</td><td>7,497</td></tr>
+            <tr><td rowspan="3" class="mono text-xs text-[#849495] align-top pt-3">A.value &gt; 150</td><td>Nested Loop Join</td><td class="t-red">28</td><td class="t-red">2,511,000</td><td>2,510</td></tr>
+            <tr><td>Hash Join</td><td class="t-green">3</td><td class="t-green">2,000</td><td>2,510</td></tr>
+            <tr><td>Merge Join</td><td class="t-green">1</td><td class="t-yellow">15,216</td><td>2,510</td></tr>
+            <tr><td rowspan="3" class="mono text-xs text-[#849495] align-top pt-3">A.value &gt; 190</td><td>Nested Loop Join</td><td class="t-red">18</td><td class="t-red">522,000</td><td>521</td></tr>
+            <tr><td>Hash Join</td><td class="t-yellow">7</td><td class="t-green">2,000</td><td>521</td></tr>
+            <tr><td>Merge Join</td><td class="t-green">0</td><td class="t-yellow">13,321</td><td>521</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="space-y-2">
+      <h3 class="text-sm font-semibold text-[#dfe3e4]">Filter on B only</h3>
+      <div class="overflow-x-auto rounded-xl border border-[#3a494a]">
+        <table>
+          <thead><tr><th>Filter</th><th>Algorithm</th><th>Time (ms)</th><th>Block Accesses</th><th>Rows</th></tr></thead>
+          <tbody class="text-[#b9caca]">
+            <tr><td rowspan="3" class="mono text-xs text-[#849495] align-top pt-3">B.salary &gt; 40000</td><td>Nested Loop Join</td><td class="t-red">86</td><td class="t-red">8,901,110</td><td>8,898</td></tr>
+            <tr><td>Hash Join</td><td class="t-green">5</td><td class="t-green">2,000</td><td>8,898</td></tr>
+            <tr><td>Merge Join</td><td class="t-green">1</td><td class="t-yellow">22,574</td><td>8,898</td></tr>
+            <tr><td rowspan="3" class="mono text-xs text-[#849495] align-top pt-3">B.salary &gt; 100000</td><td>Nested Loop Join</td><td class="t-red">33</td><td class="t-red">2,221,778</td><td>2,218</td></tr>
+            <tr><td>Hash Join</td><td class="t-green">3</td><td class="t-green">2,000</td><td>2,218</td></tr>
+            <tr><td>Merge Join</td><td class="t-green">0</td><td class="t-yellow">14,917</td><td>2,218</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="space-y-2">
+      <h3 class="text-sm font-semibold text-[#dfe3e4]">Filter on Both Tables</h3>
+      <div class="overflow-x-auto rounded-xl border border-[#3a494a]">
+        <table>
+          <thead><tr><th>Filter</th><th>Algorithm</th><th>Time (ms)</th><th>Block Accesses</th><th>Rows</th></tr></thead>
+          <tbody class="text-[#b9caca]">
+            <tr><td rowspan="3" class="mono text-xs text-[#849495] align-top pt-3">A.value &gt; 50, B.salary &gt; 40000</td><td>Nested Loop Join</td><td class="t-red">161</td><td class="t-red">6,673,440</td><td>6,678</td></tr>
+            <tr><td>Hash Join</td><td class="t-green">7</td><td class="t-green">2,000</td><td>6,678</td></tr>
+            <tr><td>Merge Join</td><td class="t-yellow">3</td><td class="t-yellow">19,522</td><td>6,678</td></tr>
+            <tr><td rowspan="3" class="mono text-xs text-[#849495] align-top pt-3">A.value &gt; 150, B.salary &gt; 100000</td><td>Nested Loop Join</td><td class="t-red">18</td><td class="t-red">558,998</td><td>550</td></tr>
+            <tr><td>Hash Join</td><td class="t-yellow">8</td><td class="t-green">2,000</td><td>550</td></tr>
+            <tr><td>Merge Join</td><td class="t-green">0</td><td class="t-green">6,203</td><td>550</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Algorithm Comparison -->
+  <div class="glass rounded-2xl p-8 space-y-4">
+    <h2 class="mono text-sm text-[#00f5ff] uppercase tracking-widest border-b border-[#3a494a] pb-3">Algorithm Comparison</h2>
+    <div class="overflow-x-auto rounded-xl border border-[#3a494a]">
+      <table>
+        <thead><tr><th>Factor</th><th>Nested Loop Join</th><th>Hash Join</th><th>Merge Join</th></tr></thead>
+        <tbody class="text-[#b9caca]">
+          <tr><td class="text-[#dfe3e4]">Complexity</td><td class="mono text-xs">O(N × M)</td><td class="mono text-xs">O(N + M)</td><td class="mono text-xs">O(N log N + M log M)</td></tr>
+          <tr><td class="text-[#dfe3e4]">Speed</td><td class="t-red">Slow</td><td class="t-green">Fast</td><td class="t-green">Fastest (sorted data)</td></tr>
+          <tr><td class="text-[#dfe3e4]">Block Accesses</td><td class="t-red">Very High</td><td class="t-green">Lowest (constant)</td><td class="t-yellow">Medium</td></tr>
+          <tr><td class="text-[#dfe3e4]">Filter Sensitivity</td><td class="t-yellow">High — fewer left tuples = fewer iterations</td><td class="t-green">Stable regardless of filter</td><td class="t-green">Relatively stable</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Video -->
+  <div class="space-y-4">
+    <h2 class="mono text-sm text-[#00f5ff] uppercase tracking-widest">Demo Video</h2>
+    <div class="glass rounded-2xl overflow-hidden flex items-center justify-center">
+      <video src="vid/query engine demo.mp4" loop controls class="w-auto max-h-[80vh] max-w-full"></video>
+    </div>
+  </div>
+
+  <!-- Source Code -->
+  <div class="glass rounded-2xl p-8 space-y-4">
+    <h2 class="mono text-sm text-[#00f5ff] uppercase tracking-widest border-b border-[#3a494a] pb-3">Source Code</h2>
+
+    <!-- Tabs -->
+    <div class="flex flex-wrap gap-2" id="code-tabs">
+      <button onclick="showTab('Main')" class="code-tab active mono text-xs px-3 py-1.5 rounded-md border border-[#00f5ff]/40 text-[#00f5ff] bg-[#00f5ff]/10 transition-colors">Main</button>
+      <button onclick="showTab('Parser')" class="code-tab mono text-xs px-3 py-1.5 rounded-md border border-[#3a494a] text-[#849495] hover:text-[#e9feff] hover:border-[#6fd6df]/40 transition-colors">Parser</button>
+      <button onclick="showTab('QueryPlanner')" class="code-tab mono text-xs px-3 py-1.5 rounded-md border border-[#3a494a] text-[#849495] hover:text-[#e9feff] hover:border-[#6fd6df]/40 transition-colors">QueryPlanner</button>
+      <button onclick="showTab('Operator')" class="code-tab mono text-xs px-3 py-1.5 rounded-md border border-[#3a494a] text-[#849495] hover:text-[#e9feff] hover:border-[#6fd6df]/40 transition-colors">Operator</button>
+      <button onclick="showTab('Scan')" class="code-tab mono text-xs px-3 py-1.5 rounded-md border border-[#3a494a] text-[#849495] hover:text-[#e9feff] hover:border-[#6fd6df]/40 transition-colors">Scan</button>
+      <button onclick="showTab('Selection')" class="code-tab mono text-xs px-3 py-1.5 rounded-md border border-[#3a494a] text-[#849495] hover:text-[#e9feff] hover:border-[#6fd6df]/40 transition-colors">Selection</button>
+      <button onclick="showTab('Projection')" class="code-tab mono text-xs px-3 py-1.5 rounded-md border border-[#3a494a] text-[#849495] hover:text-[#e9feff] hover:border-[#6fd6df]/40 transition-colors">Projection</button>
+      <button onclick="showTab('NestedLoopJoin')" class="code-tab mono text-xs px-3 py-1.5 rounded-md border border-[#3a494a] text-[#849495] hover:text-[#e9feff] hover:border-[#6fd6df]/40 transition-colors">NestedLoopJoin</button>
+      <button onclick="showTab('HashJoin')" class="code-tab mono text-xs px-3 py-1.5 rounded-md border border-[#3a494a] text-[#849495] hover:text-[#e9feff] hover:border-[#6fd6df]/40 transition-colors">HashJoin</button>
+      <button onclick="showTab('MergeJoin')" class="code-tab mono text-xs px-3 py-1.5 rounded-md border border-[#3a494a] text-[#849495] hover:text-[#e9feff] hover:border-[#6fd6df]/40 transition-colors">MergeJoin</button>
+      <button onclick="showTab('Tuple')" class="code-tab mono text-xs px-3 py-1.5 rounded-md border border-[#3a494a] text-[#849495] hover:text-[#e9feff] hover:border-[#6fd6df]/40 transition-colors">Tuple</button>
+    </div>
+
+    <!-- Copy button -->
+    <div class="flex justify-end">
+      <button onclick="copyActive()" class="mono text-xs text-[#849495] hover:text-[#e9feff] transition-colors flex items-center gap-1">
+        <span class="material-symbols-outlined text-sm">content_copy</span>
+        <span id="copy-label">Copy</span>
+      </button>
+    </div>
+
+    <!-- Code panels -->
+    <div id="code-panel" class="bg-[#0a0f10] border border-[#3a494a] rounded-xl overflow-x-auto">
+      <pre class="p-5 text-xs leading-relaxed text-[#b9caca]"><code id="code-display"></code></pre>
+    </div>
+  </div>
+
+  <script>
+    const files = {
+      Main: `import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner scanner = new Scanner(System.in);\n        Parser parser   = new Parser();\n\n        System.out.println("Mini Query Execution Engine");\n        System.out.println("===========================");\n        System.out.println("Tables:");\n        System.out.println("  A(id, value, name)");\n        System.out.println("  B(id, salary, department)");\n        System.out.println("Type 'exit' to quit.\\n");\n\n        while (true) {\n            System.out.print("SQL> ");\n            String input = scanner.nextLine().trim();\n\n            if (input.isEmpty()) continue;\n            if (input.equalsIgnoreCase("exit")) break;\n\n            try {\n                parser.parse(input);\n                System.out.println();\n                System.out.println("=== Nested Loop Join ===");\n                QueryPlanner.executePlan(parser, "NLJ");\n                System.out.println("=== Hash Join ===");\n                QueryPlanner.executePlan(parser, "HASH");\n                System.out.println("=== Merge Join ===");\n                QueryPlanner.executePlan(parser, "MERGE");\n            } catch (Exception e) {\n                System.out.println("Error: " + e.getMessage());\n                System.out.println();\n            }\n        }\n        scanner.close();\n    }\n}\n// Example queries:\n// SELECT A.id, B.salary FROM A, B WHERE A.id = B.id\n// SELECT A.id, A.value, B.salary FROM A, B WHERE A.id = B.id AND A.value > 50\n// SELECT A.id, A.value, B.salary FROM A, B WHERE A.id = B.id AND A.value > 100 AND B.salary > 80000`,
+
+      Parser: `public class Parser {\n    private String[] columns;\n    private String filterColumnA;\n    private String filterOperatorA;\n    private float filterValueA;\n    private boolean hasFilterA = false;\n    private String filterColumnB;\n    private String filterOperatorB;\n    private float filterValueB;\n    private boolean hasFilterB = false;\n\n    public String[] getColumns()       { return columns; }\n    public boolean hasFilterA()        { return hasFilterA; }\n    public String getFilterColumnA()   { return filterColumnA; }\n    public String getFilterOperatorA() { return filterOperatorA; }\n    public float getFilterValueA()     { return filterValueA; }\n    public boolean hasFilterB()        { return hasFilterB; }\n    public String getFilterColumnB()   { return filterColumnB; }\n    public String getFilterOperatorB() { return filterOperatorB; }\n    public float getFilterValueB()     { return filterValueB; }\n\n    public void parse(String sql) {\n        hasFilterA = false;\n        hasFilterB = false;\n\n        String selectPart = sql.substring(sql.toUpperCase().indexOf("SELECT") + 6, sql.toUpperCase().indexOf("FROM")).trim();\n        String[] rawCols = selectPart.split(",");\n        columns = new String[rawCols.length];\n        for (int i = 0; i < rawCols.length; i++){\n            columns[i] = rawCols[i].trim().replaceAll(".*\\\\.", "");\n        }\n\n        String wherePart = sql.substring(sql.toUpperCase().indexOf("WHERE") + 5).trim();\n        String[] conditions = wherePart.split("(?i)\\\\bAND\\\\b");\n\n        for (String condition : conditions) {\n            condition = condition.trim();\n            if (condition.toUpperCase().contains("A.ID") && condition.toUpperCase().contains("B.ID"))\n                continue;\n\n            String opSymbol = null;\n            for (String op : new String[]{">=", "<=", "!=", ">", "<", "="}) {\n                if (condition.contains(op)) {\n                    opSymbol = op;\n                    break;\n                }\n            }\n\n            String[] parts = condition.split(opSymbol, 2);\n            String fullColumn = parts[0].trim();\n            float val = Float.parseFloat(parts[1].trim());\n            String tablePrefix = fullColumn.split("\\\\.")[0].toUpperCase();\n            String colName = fullColumn.split("\\\\.")[1];\n\n            if (tablePrefix.equals("A")) {\n                filterColumnA = colName; filterOperatorA = opSymbol; filterValueA = val; hasFilterA = true;\n            } else if (tablePrefix.equals("B")) {\n                filterColumnB = colName; filterOperatorB = opSymbol; filterValueB = val; hasFilterB = true;\n            }\n        }\n    }\n}`,
+
+      QueryPlanner: `public class QueryPlanner {\n    public static void executePlan(Parser parser, String joinType) {\n        Scan scanA = new Scan("A.csv", "A");\n        Scan scanB = new Scan("B.csv", "B");\n\n        Operator leftOp = parser.hasFilterA()\n            ? new Selection(scanA, parser.getFilterColumnA(), parser.getFilterOperatorA(), parser.getFilterValueA())\n            : scanA;\n\n        Operator rightOp = parser.hasFilterB()\n            ? new Selection(scanB, parser.getFilterColumnB(), parser.getFilterOperatorB(), parser.getFilterValueB())\n            : scanB;\n\n        Operator join;\n        switch (joinType) {\n            case "NLJ":   join = new NestedLoopJoin(leftOp, rightOp); break;\n            case "HASH":  join = new HashJoin(leftOp, rightOp);       break;\n            default:      join = new MergeJoin(leftOp, rightOp);      break;\n        }\n\n        Projection proj = new Projection(join, parser.getColumns());\n        long start = System.currentTimeMillis();\n        int rowCount = 0;\n        Tuple t = proj.getNextTuple();\n        while (t != null) { rowCount++; t = proj.getNextTuple(); }\n        long end = System.currentTimeMillis();\n\n        int scanBlocks = scanA.getTotalBlocksRead() + scanB.getTotalBlocksRead();\n        int joinBlocks = 0;\n        if (join instanceof NestedLoopJoin) joinBlocks = ((NestedLoopJoin) join).getBlockAccesses();\n        else if (join instanceof HashJoin)  joinBlocks = ((HashJoin) join).getBlockAccesses();\n        else if (join instanceof MergeJoin) joinBlocks = ((MergeJoin) join).getBlockAccesses();\n\n        System.out.println("Rows returned  : " + rowCount);\n        System.out.println("Time taken     : " + (end - start) + " ms");\n        System.out.println("Block accesses : " + (scanBlocks + joinBlocks));\n        System.out.println();\n    }\n}`,
+
+      Operator: `public interface Operator {\n    Tuple getNextTuple();\n}`,
+
+      Scan: `import java.io.BufferedReader;\nimport java.io.FileReader;\nimport java.io.IOException;\n\npublic class Scan implements Operator {\n    private BufferedReader reader;\n    private String tableName;\n    private int tupleCount;\n    private int blockAccesses;\n    public static final int BLOCK_SIZE = 10;\n\n    public Scan(String filePath, String tableName) {\n        this.tableName = tableName;\n        this.tupleCount = 0;\n        blockAccesses = 0;\n        try {\n            reader = new BufferedReader(new FileReader(filePath));\n            reader.readLine(); // skip header\n        } catch (IOException e) { e.printStackTrace(); }\n    }\n\n    public Tuple getNextTuple() {\n        if (reader == null) return null;\n        try {\n            String line = reader.readLine();\n            if (line == null) return null;\n            tupleCount++;\n            if (tupleCount % BLOCK_SIZE == 0) blockAccesses++;\n            String[] parts = line.split(",");\n            if (tableName.equals("A")) {\n                return new Tuple(Integer.parseInt(parts[0].trim()), Float.parseFloat(parts[1].trim()), parts[2].trim());\n            } else {\n                return new Tuple(Integer.parseInt(parts[0].trim()), 0, null, Float.parseFloat(parts[1].trim()), parts[2].trim());\n            }\n        } catch (IOException e) { e.printStackTrace(); return null; }\n    }\n\n    public int getTotalBlocksRead() {\n        int partial = (tupleCount % BLOCK_SIZE == 0) ? 0 : 1;\n        return blockAccesses + partial;\n    }\n}`,
+
+      Selection: `public class Selection implements Operator {\n    private Operator operation;\n    private String column;\n    private String operator;\n    private float value;\n\n    public Selection(Operator operation, String column, String operator, float value) {\n        this.operation = operation;\n        this.column = column;\n        this.operator = operator;\n        this.value = value;\n    }\n\n    public Tuple getNextTuple() {\n        Tuple t = operation.getNextTuple();\n        while (t != null) {\n            if (checkCondition(t)) return t;\n            t = operation.getNextTuple();\n        }\n        return null;\n    }\n\n    private boolean checkCondition(Tuple t) {\n        float fieldValue;\n        switch (column) {\n            case "value":  fieldValue = t.getValue();  break;\n            case "id":     fieldValue = t.getId();     break;\n            case "salary": fieldValue = t.getSalary(); break;\n            default: return false;\n        }\n        switch (operator) {\n            case ">":  return fieldValue > value;\n            case "<":  return fieldValue < value;\n            case "=":  return fieldValue == value;\n            case ">=": return fieldValue >= value;\n            case "<=": return fieldValue <= value;\n            default:   return false;\n        }\n    }\n}`,
+
+      Projection: `public class Projection implements Operator {\n    private Operator operation;\n    private String[] fields;\n\n    public Projection(Operator operation, String[] fields) {\n        this.operation = operation;\n        this.fields = fields;\n    }\n\n    public Tuple getNextTuple() {\n        return operation.getNextTuple();\n    }\n\n    public void printTuple(Tuple t) {\n        String result = "";\n        for (String f : fields) {\n            switch (f) {\n                case "id":         result += "id="         + t.getId()         + " | "; break;\n                case "value":      result += "value="      + t.getValue()      + " | "; break;\n                case "name":       result += "name="       + t.getName()       + " | "; break;\n                case "salary":     result += "salary="     + t.getSalary()     + " | "; break;\n                case "department": result += "department=" + t.getDepartment() + " | "; break;\n            }\n        }\n        System.out.println(result);\n    }\n}`,
+
+      NestedLoopJoin: `import java.util.ArrayList;\n\npublic class NestedLoopJoin implements Operator {\n    private Operator leftOperator;\n    private ArrayList<Tuple> rightTuples;\n    private Tuple currentLeft;\n    private int rightIndex;\n    private int rightBlocks;\n    private int blockAccesses;\n\n    public NestedLoopJoin(Operator leftOperator, Operator rightOperator) {\n        this.leftOperator = leftOperator;\n        this.rightTuples = new ArrayList<>();\n        this.rightIndex = 0;\n        Tuple t = rightOperator.getNextTuple();\n        while (t != null) { rightTuples.add(t); t = rightOperator.getNextTuple(); }\n        rightBlocks = (int) Math.ceil((double) rightTuples.size() / Scan.BLOCK_SIZE);\n        currentLeft = leftOperator.getNextTuple();\n        blockAccesses = 0;\n    }\n\n    public int getBlockAccesses() { return blockAccesses; }\n\n    public Tuple getNextTuple() {\n        while (currentLeft != null) {\n            while (rightIndex < rightTuples.size()) {\n                Tuple right = rightTuples.get(rightIndex++);\n                if (currentLeft.getId() == right.getId())\n                    return new Tuple(currentLeft.getId(), currentLeft.getValue(), currentLeft.getName(), right.getSalary(), right.getDepartment());\n            }\n            currentLeft = leftOperator.getNextTuple();\n            rightIndex = 0;\n            if (currentLeft != null) blockAccesses += rightBlocks;\n        }\n        return null;\n    }\n}`,
+
+      HashJoin: `import java.util.HashMap;\n\npublic class HashJoin implements Operator {\n    private Operator leftOperator;\n    private HashMap<Integer, Tuple> hashTable;\n    private int blockAccesses;\n\n    public HashJoin(Operator leftOperator, Operator rightOperator) {\n        this.leftOperator = leftOperator;\n        this.hashTable = new HashMap<>();\n        this.blockAccesses = 0;\n        Tuple t = rightOperator.getNextTuple();\n        while (t != null) { hashTable.put(t.getId(), t); t = rightOperator.getNextTuple(); }\n    }\n\n    public int getBlockAccesses() { return blockAccesses; }\n\n    public Tuple getNextTuple() {\n        Tuple left = leftOperator.getNextTuple();\n        while (left != null) {\n            Tuple right = hashTable.get(left.getId());\n            if (right != null)\n                return new Tuple(left.getId(), left.getValue(), left.getName(), right.getSalary(), right.getDepartment());\n            left = leftOperator.getNextTuple();\n        }\n        return null;\n    }\n}`,
+
+      MergeJoin: `import java.util.ArrayList;\nimport java.util.Collections;\n\npublic class MergeJoin implements Operator {\n    private ArrayList<Tuple> leftSorted;\n    private ArrayList<Tuple> rightSorted;\n    private int leftIndex;\n    private int rightIndex;\n    private int blockAccesses;\n\n    public MergeJoin(Operator leftOperator, Operator rightOperator) {\n        leftSorted = new ArrayList<>();\n        rightSorted = new ArrayList<>();\n        Tuple t = leftOperator.getNextTuple();\n        while (t != null) { leftSorted.add(t); t = leftOperator.getNextTuple(); }\n        t = rightOperator.getNextTuple();\n        while (t != null) { rightSorted.add(t); t = rightOperator.getNextTuple(); }\n        Collections.sort(leftSorted);\n        Collections.sort(rightSorted);\n        int bA = (int) Math.ceil((double) leftSorted.size() / Scan.BLOCK_SIZE);\n        int bB = (int) Math.ceil((double) rightSorted.size() / Scan.BLOCK_SIZE);\n        blockAccesses += (int)(bA * (Math.log(bA) / Math.log(2))) + (int)(bB * (Math.log(bB) / Math.log(2))) + bA + bB;\n        leftIndex = 0; rightIndex = 0;\n    }\n\n    public int getBlockAccesses() { return blockAccesses; }\n\n    public Tuple getNextTuple() {\n        while (leftIndex < leftSorted.size() && rightIndex < rightSorted.size()) {\n            Tuple left  = leftSorted.get(leftIndex);\n            Tuple right = rightSorted.get(rightIndex);\n            if (left.getId() == right.getId()) {\n                rightIndex++;\n                return new Tuple(left.getId(), left.getValue(), left.getName(), right.getSalary(), right.getDepartment());\n            } else if (left.getId() < right.getId()) leftIndex++;\n            else rightIndex++;\n        }\n        return null;\n    }\n}`,
+
+      Tuple: `public class Tuple implements Comparable<Tuple> {\n    private int id;\n    private float value;\n    private String name;\n    private float salary;\n    private String department;\n\n    public Tuple(int id, float value, String name) {\n        this.id = id; this.value = value; this.name = name;\n    }\n\n    public Tuple(int id, float value, String name, float salary, String department) {\n        this.id = id; this.value = value; this.name = name;\n        this.salary = salary; this.department = department;\n    }\n\n    public int getId()           { return id; }\n    public float getValue()      { return value; }\n    public String getName()      { return name; }\n    public float getSalary()     { return salary; }\n    public String getDepartment(){ return department; }\n\n    public int compareTo(Tuple t) { return Integer.compare(this.id, t.id); }\n}`
+    };
+
+    function showTab(name) {
+      document.getElementById('code-display').textContent = files[name];
+      document.querySelectorAll('.code-tab').forEach(btn => {
+        const active = btn.textContent === name;
+        btn.classList.toggle('active', active);
+        btn.classList.toggle('border-[#00f5ff]/40', active);
+        btn.classList.toggle('text-[#00f5ff]', active);
+        btn.classList.toggle('bg-[#00f5ff]/10', active);
+        btn.classList.toggle('border-[#3a494a]', !active);
+        btn.classList.toggle('text-[#849495]', !active);
+      });
+    }
+
+    function copyActive() {
+      const code = document.getElementById('code-display').textContent;
+      navigator.clipboard.writeText(code).then(() => {
+        const label = document.getElementById('copy-label');
+        label.textContent = 'Copied!';
+        setTimeout(() => label.textContent = 'Copy', 2000);
+      });
+    }
+
+    showTab('Main');
+  </script>
+
+  <!-- Tech Stack -->
+  <div class="glass rounded-2xl p-8 space-y-4">
+    <h2 class="mono text-sm text-[#00f5ff] uppercase tracking-widest border-b border-[#3a494a] pb-3">Tech Stack</h2>
+    <div class="flex flex-wrap gap-2">
+      <span class="px-3 py-1 bg-[#e9feff]/10 text-[#e9feff] border border-[#e9feff]/20 rounded-md text-xs mono">Java</span>
+      <span class="px-3 py-1 bg-[#e9feff]/10 text-[#e9feff] border border-[#e9feff]/20 rounded-md text-xs mono">Iterator Model</span>
+      <span class="px-3 py-1 bg-[#e9feff]/10 text-[#e9feff] border border-[#e9feff]/20 rounded-md text-xs mono">CSV File I/O</span>
+      <span class="px-3 py-1 bg-[#e9feff]/10 text-[#e9feff] border border-[#e9feff]/20 rounded-md text-xs mono">Nested Loop Join</span>
+      <span class="px-3 py-1 bg-[#e9feff]/10 text-[#e9feff] border border-[#e9feff]/20 rounded-md text-xs mono">Hash Join</span>
+      <span class="px-3 py-1 bg-[#e9feff]/10 text-[#e9feff] border border-[#e9feff]/20 rounded-md text-xs mono">Merge Join</span>
+      <span class="px-3 py-1 bg-[#e9feff]/10 text-[#e9feff] border border-[#e9feff]/20 rounded-md text-xs mono">Relational Algebra</span>
+    </div>
+  </div>
+
+  <div class="text-center py-6 border-t border-[#3a494a]">
+    <p class="text-[#849495] text-sm mono">Final Project · Database Management Systems — 13435</p>
+    <p class="text-[#849495] text-sm mono">Princess Sumaya University for Technology</p>
+  </div>
+
+</main>
+</body>
+</html>

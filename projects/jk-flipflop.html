@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>JK Flip-Flop Counter · Hanna Qahoush</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+<style>
+  body { background:#0f1415; color:#dfe3e4; font-family:'Outfit',sans-serif; min-height:100dvh; }
+  .material-symbols-outlined { font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; }
+  .glass { background:rgba(0,50,54,0.4); backdrop-filter:blur(20px); border:1px solid rgba(0,139,148,0.2); }
+  .mono { font-family:'JetBrains Mono',monospace; }
+  .seq-box { display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
+  .seq-num { width:40px; height:40px; border:1px solid rgba(0,245,255,0.3); border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:16px; color:#e9feff; background:rgba(0,245,255,0.05); font-family:'JetBrains Mono',monospace; }
+  .seq-arrow { color:#849495; font-size:12px; }
+</style>
+</head>
+<body class="overflow-x-hidden">
+
+<header class="sticky top-0 z-50 bg-[#0f1415]/80 backdrop-blur border-b border-[#3a494a]">
+  <div class="max-w-4xl mx-auto px-4 h-14 flex items-center gap-3">
+    <a href="../index.html" class="flex items-center gap-2 text-[#849495] hover:text-[#e9feff] transition-colors">
+      <span class="material-symbols-outlined text-lg">arrow_back</span>
+      <span class="mono text-xs uppercase tracking-widest">Back to Portfolio</span>
+    </a>
+  </div>
+</header>
+
+<main class="max-w-4xl mx-auto px-4 py-12 space-y-12">
+
+  <div class="space-y-4">
+    <div class="flex flex-wrap items-center gap-3">
+      <span class="mono text-xs text-[#6fd6df] uppercase tracking-widest border border-[#6fd6df]/30 px-3 py-1 rounded-full">Digital Logic · Hardware</span>
+      <span class="mono text-xs text-[#849495]">Digital Logic Design</span>
+    </div>
+    <h1 class="text-4xl md:text-5xl font-bold text-[#e9feff] leading-tight">JK Flip-Flop Counter</h1>
+    <p class="text-[#b9caca] text-lg leading-relaxed max-w-2xl">
+      A bidirectional synchronous digital counter based on a student ID sequence, implemented using JK flip-flops with full K-map minimization and state diagram design.
+    </p>
+  </div>
+
+  <div class="glass rounded-2xl p-8 space-y-4">
+    <h2 class="mono text-sm text-[#00f5ff] uppercase tracking-widest border-b border-[#3a494a] pb-3">Project Overview</h2>
+    <p class="text-[#b9caca] leading-relaxed">
+      This Digital Logic Design project implements a bidirectional synchronous counter whose sequence is derived from a student ID number. The counter cycles through the digits of the ID in forward order when an external input is 0, and in reverse order when the input is 1. All flip-flops are triggered by a shared clock signal.
+    </p>
+    <p class="text-[#b9caca] leading-relaxed">
+      The design process covers state diagrams, excitation tables, Karnaugh map simplifications, and the derivation of J and K input equations for each flip-flop.
+    </p>
+  </div>
+
+  <!-- Sequence example -->
+  <div class="glass rounded-2xl p-8 space-y-6">
+    <h2 class="mono text-sm text-[#00f5ff] uppercase tracking-widest border-b border-[#3a494a] pb-3">Example Counter Sequence (ID: 20198765)</h2>
+    <div class="space-y-4">
+      <div>
+        <p class="mono text-xs text-[#6fd6df] mb-3">INPUT = 0 — Forward</p>
+        <div class="seq-box">
+          <div class="seq-num">2</div><span class="seq-arrow">→</span>
+          <div class="seq-num">0</div><span class="seq-arrow">→</span>
+          <div class="seq-num">1</div><span class="seq-arrow">→</span>
+          <div class="seq-num">9</div><span class="seq-arrow">→</span>
+          <div class="seq-num">8</div><span class="seq-arrow">→</span>
+          <div class="seq-num">7</div><span class="seq-arrow">→</span>
+          <div class="seq-num">6</div><span class="seq-arrow">→</span>
+          <div class="seq-num">5</div><span class="seq-arrow">↩</span>
+        </div>
+      </div>
+      <div>
+        <p class="mono text-xs text-[#a3ced3] mb-3">INPUT = 1 — Reverse</p>
+        <div class="seq-box">
+          <div class="seq-num">5</div><span class="seq-arrow">→</span>
+          <div class="seq-num">6</div><span class="seq-arrow">→</span>
+          <div class="seq-num">7</div><span class="seq-arrow">→</span>
+          <div class="seq-num">8</div><span class="seq-arrow">→</span>
+          <div class="seq-num">9</div><span class="seq-arrow">→</span>
+          <div class="seq-num">1</div><span class="seq-arrow">→</span>
+          <div class="seq-num">0</div><span class="seq-arrow">→</span>
+          <div class="seq-num">2</div><span class="seq-arrow">↩</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="glass rounded-2xl p-8 space-y-4">
+    <h2 class="mono text-sm text-[#00f5ff] uppercase tracking-widest border-b border-[#3a494a] pb-3">Implemented Features</h2>
+    <div class="grid md:grid-cols-2 gap-3">
+      <div class="flex items-start gap-3 p-3 bg-[#1b2021] rounded-xl">
+        <span class="material-symbols-outlined text-[#00f5ff] text-sm mt-0.5">check_circle</span>
+        <div><p class="font-semibold text-sm text-[#dfe3e4]">ID-Based Counter Sequence</p><p class="text-xs text-[#849495]">Forward and reverse sequences derived from student ID digits</p></div>
+      </div>
+      <div class="flex items-start gap-3 p-3 bg-[#1b2021] rounded-xl">
+        <span class="material-symbols-outlined text-[#00f5ff] text-sm mt-0.5">check_circle</span>
+        <div><p class="font-semibold text-sm text-[#dfe3e4]">Synchronous Logic</p><p class="text-xs text-[#849495]">All flip-flops triggered by a common clock signal</p></div>
+      </div>
+      <div class="flex items-start gap-3 p-3 bg-[#1b2021] rounded-xl">
+        <span class="material-symbols-outlined text-[#00f5ff] text-sm mt-0.5">check_circle</span>
+        <div><p class="font-semibold text-sm text-[#dfe3e4]">External Direction Control</p><p class="text-xs text-[#849495]">1-bit input selects forward (0) or reverse (1) counting</p></div>
+      </div>
+      <div class="flex items-start gap-3 p-3 bg-[#1b2021] rounded-xl">
+        <span class="material-symbols-outlined text-[#00f5ff] text-sm mt-0.5">check_circle</span>
+        <div><p class="font-semibold text-sm text-[#dfe3e4]">Karnaugh Map Minimization</p><p class="text-xs text-[#849495]">K-maps used to minimize J and K logic expressions</p></div>
+      </div>
+      <div class="flex items-start gap-3 p-3 bg-[#1b2021] rounded-xl">
+        <span class="material-symbols-outlined text-[#00f5ff] text-sm mt-0.5">check_circle</span>
+        <div><p class="font-semibold text-sm text-[#dfe3e4]">State Diagrams &amp; Excitation Tables</p><p class="text-xs text-[#849495]">Full theoretical design documentation</p></div>
+      </div>
+      <div class="flex items-start gap-3 p-3 bg-[#1b2021] rounded-xl">
+        <span class="material-symbols-outlined text-[#00f5ff] text-sm mt-0.5">check_circle</span>
+        <div><p class="font-semibold text-sm text-[#dfe3e4]">Looping Counter</p><p class="text-xs text-[#849495]">Cycles continuously through the ID-based sequence</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Diagrams -->
+  <div class="space-y-4">
+    <h2 class="mono text-sm text-[#00f5ff] uppercase tracking-widest">Design Diagrams</h2>
+    <div class="grid md:grid-cols-2 gap-4">
+      <div class="glass rounded-xl aspect-video flex items-center justify-center"><img src="img/dld1.png" alt="K-map Design" class="w-full rounded-xl"/></div>
+      <div class="glass rounded-xl aspect-video flex items-center justify-center"><img src="img/dld2.png" alt="State Diagram" class="w-full rounded-xl"/></div>
+      <div class="glass rounded-xl aspect-video flex items-center justify-center"><img src="img/dld3.png" alt="Logic Equations" class="w-full rounded-xl"/></div>
+      <div class="glass rounded-xl aspect-video flex items-center justify-center"><img src="img/dld4.png" alt="Final Circuit" class="w-full rounded-xl"/></div>
+    </div>
+  </div>
+
+  <div class="text-center py-6 border-t border-[#3a494a]">
+    <p class="text-[#849495] text-sm mono">Final Project · Digital Logic Design</p>
+    <p class="text-[#849495] text-sm mono">Princess Sumaya University for Technology</p>
+  </div>
+
+</main>
+</body>
+</html>

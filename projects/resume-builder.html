@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Resume Builder · Hanna Qahoush</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+<style>
+  body { background:#0f1415; color:#dfe3e4; font-family:'Outfit',sans-serif; min-height:100dvh; }
+  .material-symbols-outlined { font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; }
+  .glass { background:rgba(0,50,54,0.4); backdrop-filter:blur(20px); border:1px solid rgba(0,139,148,0.2); }
+  .mono { font-family:'JetBrains Mono',monospace; }
+</style>
+</head>
+<body class="overflow-x-hidden">
+
+<header class="sticky top-0 z-50 bg-[#0f1415]/80 backdrop-blur border-b border-[#3a494a]">
+  <div class="max-w-4xl mx-auto px-4 h-14 flex items-center gap-3">
+    <a href="../index.html" class="flex items-center gap-2 text-[#849495] hover:text-[#e9feff] transition-colors">
+      <span class="material-symbols-outlined text-lg">arrow_back</span>
+      <span class="mono text-xs uppercase tracking-widest">Back to Portfolio</span>
+    </a>
+  </div>
+</header>
+
+<main class="max-w-4xl mx-auto px-4 py-12 space-y-12">
+
+  <div class="space-y-4">
+    <div class="flex flex-wrap items-center gap-3">
+      <span class="mono text-xs text-[#6fd6df] uppercase tracking-widest border border-[#6fd6df]/30 px-3 py-1 rounded-full">PHP · MySQL · jQuery</span>
+      <span class="mono text-xs text-[#849495]">Webpage Design &amp; Internet Programming</span>
+    </div>
+    <h1 class="text-4xl md:text-5xl font-bold text-[#e9feff] leading-tight">Resume Builder</h1>
+    <p class="text-[#b9caca] text-lg leading-relaxed max-w-2xl">
+      A multipage web application for creating professional resumes with live preview, user authentication, and persistent database storage.
+    </p>
+  </div>
+
+  <!-- Video placeholder -->
+  <div class="glass rounded-2xl overflow-hidden aspect-video flex items-center justify-center">
+    <video src="vid/ProFile - Online Resume Builder.mp4" loop controls></video>
+  </div>
+
+  <div class="glass rounded-2xl p-8 space-y-4">
+    <h2 class="mono text-sm text-[#00f5ff] uppercase tracking-widest border-b border-[#3a494a] pb-3">Project Overview</h2>
+    <p class="text-[#b9caca] leading-relaxed">
+      Resume Builder is a full-stack web application that lets users create polished, professional resumes through a guided multi-step form with a live side-by-side preview. The backend is powered by PHP and MySQL, handling authentication, session management, and secure data persistence. The frontend uses HTML5, CSS3, JavaScript, and jQuery for interactive, responsive behavior.
+    </p>
+    <p class="text-[#b9caca] leading-relaxed">
+      Built as the final project for Webpage Design and Internet Programming (12243) at Princess Sumaya University for Technology, Spring 2024/2025.
+    </p>
+  </div>
+
+  <div class="glass rounded-2xl p-8 space-y-4">
+    <h2 class="mono text-sm text-[#00f5ff] uppercase tracking-widest border-b border-[#3a494a] pb-3">Implemented Features</h2>
+    <div class="grid md:grid-cols-2 gap-3">
+      <div class="flex items-start gap-3 p-3 bg-[#1b2021] rounded-xl">
+        <span class="material-symbols-outlined text-[#00f5ff] text-sm mt-0.5">check_circle</span>
+        <div><p class="font-semibold text-sm text-[#dfe3e4]">Live Resume Preview</p><p class="text-xs text-[#849495]">Updates instantly as user types — zero page reload</p></div>
+      </div>
+      <div class="flex items-start gap-3 p-3 bg-[#1b2021] rounded-xl">
+        <span class="material-symbols-outlined text-[#00f5ff] text-sm mt-0.5">check_circle</span>
+        <div><p class="font-semibold text-sm text-[#dfe3e4]">PHP/MySQL Authentication</p><p class="text-xs text-[#849495]">Secure login, registration, and session management</p></div>
+      </div>
+      <div class="flex items-start gap-3 p-3 bg-[#1b2021] rounded-xl">
+        <span class="material-symbols-outlined text-[#00f5ff] text-sm mt-0.5">check_circle</span>
+        <div><p class="font-semibold text-sm text-[#dfe3e4]">Form Validation</p><p class="text-xs text-[#849495]">Client &amp; server-side validation for all required fields</p></div>
+      </div>
+      <div class="flex items-start gap-3 p-3 bg-[#1b2021] rounded-xl">
+        <span class="material-symbols-outlined text-[#00f5ff] text-sm mt-0.5">check_circle</span>
+        <div><p class="font-semibold text-sm text-[#dfe3e4]">Database Integration</p><p class="text-xs text-[#849495]">Stores user data and resume info persistently in MySQL</p></div>
+      </div>
+      <div class="flex items-start gap-3 p-3 bg-[#1b2021] rounded-xl">
+        <span class="material-symbols-outlined text-[#00f5ff] text-sm mt-0.5">check_circle</span>
+        <div><p class="font-semibold text-sm text-[#dfe3e4]">Resume Form</p><p class="text-xs text-[#849495]">Collects name, phone, education, experience, skills, photo</p></div>
+      </div>
+      <div class="flex items-start gap-3 p-3 bg-[#1b2021] rounded-xl">
+        <span class="material-symbols-outlined text-[#00f5ff] text-sm mt-0.5">check_circle</span>
+        <div><p class="font-semibold text-sm text-[#dfe3e4]">Session Management</p><p class="text-xs text-[#849495]">Protected pages and secure logout functionality</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="glass rounded-2xl p-8 space-y-4">
+    <h2 class="mono text-sm text-[#00f5ff] uppercase tracking-widest border-b border-[#3a494a] pb-3">Tech Stack</h2>
+    <div class="flex flex-wrap gap-2">
+      <span class="px-3 py-1 bg-[#e9feff]/10 text-[#e9feff] border border-[#e9feff]/20 rounded-md text-xs mono">HTML5</span>
+      <span class="px-3 py-1 bg-[#e9feff]/10 text-[#e9feff] border border-[#e9feff]/20 rounded-md text-xs mono">CSS3</span>
+      <span class="px-3 py-1 bg-[#e9feff]/10 text-[#e9feff] border border-[#e9feff]/20 rounded-md text-xs mono">JavaScript</span>
+      <span class="px-3 py-1 bg-[#e9feff]/10 text-[#e9feff] border border-[#e9feff]/20 rounded-md text-xs mono">jQuery</span>
+      <span class="px-3 py-1 bg-[#e9feff]/10 text-[#e9feff] border border-[#e9feff]/20 rounded-md text-xs mono">PHP</span>
+      <span class="px-3 py-1 bg-[#e9feff]/10 text-[#e9feff] border border-[#e9feff]/20 rounded-md text-xs mono">MySQL</span>
+    </div>
+  </div>
+
+  <div class="space-y-4">
+    <h2 class="mono text-sm text-[#00f5ff] uppercase tracking-widest">Screenshots</h2>
+    <p class="text-xs text-[#849495] mono">Replace placeholders below with your actual screenshots.</p>
+    <div class="space-y-4">
+      <div class="glass rounded-xl overflow-hidden">
+        <!-- <img src="../img/dataBase1.png" alt="Home Page" class="w-full rounded-xl"/> -->
+        <div class="aspect-video flex items-center justify-center"><img src="img/dataBase1.png" alt="Home Page" class="w-full rounded-xl"/></div>
+      </div>
+      <div class="glass rounded-xl overflow-hidden">
+        <div class="aspect-video flex items-center justify-center"><img src="img/dataBase2.png" alt="Resume Builder Form" class="w-full rounded-xl"/></div>
+      </div>
+      <div class="glass rounded-xl overflow-hidden">
+        <div class="aspect-video flex items-center justify-center"><img src="img/dataBase3.png" alt="Submission Confirmation" class="w-full rounded-xl"/></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-center py-6 border-t border-[#3a494a]">
+    <p class="text-[#849495] text-sm mono">Final Project · Webpage Design and Internet Programming (12243)</p>
+    <p class="text-[#849495] text-sm mono">Princess Sumaya University for Technology · Spring 2024/2025</p>
+  </div>
+
+</main>
+</body>
+</html>

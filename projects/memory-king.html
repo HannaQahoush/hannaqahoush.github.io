@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Memory King · Hanna Qahoush</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+<style>
+  body { background:#0f1415; color:#dfe3e4; font-family:'Outfit',sans-serif; min-height:100dvh; }
+  .material-symbols-outlined { font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; }
+  .glass { background:rgba(0,50,54,0.4); backdrop-filter:blur(20px); border:1px solid rgba(0,139,148,0.2); }
+  .mono { font-family:'JetBrains Mono',monospace; }
+  a { color:inherit; text-decoration:none; }
+</style>
+</head>
+<body class="overflow-x-hidden">
+
+<!-- Back nav -->
+<header class="sticky top-0 z-50 bg-[#0f1415]/80 backdrop-blur border-b border-[#3a494a]">
+  <div class="max-w-4xl mx-auto px-4 h-14 flex items-center gap-3">
+    <a href="../index.html" class="flex items-center gap-2 text-[#849495] hover:text-[#e9feff] transition-colors">
+      <span class="material-symbols-outlined text-lg">arrow_back</span>
+      <span class="mono text-xs uppercase tracking-widest">Back to Portfolio</span>
+    </a>
+  </div>
+</header>
+
+<main class="max-w-4xl mx-auto px-4 py-12 space-y-12">
+
+  <!-- Hero -->
+  <div class="space-y-4">
+    <div class="flex flex-wrap items-center gap-3">
+      <span class="mono text-xs text-[#6fd6df] uppercase tracking-widest border border-[#6fd6df]/30 px-3 py-1 rounded-full">Flutter · Firebase · Dart</span>
+      <span class="mono text-xs text-[#849495]">Mobile Application Development</span>
+    </div>
+    <h1 class="text-4xl md:text-5xl font-bold text-[#e9feff] leading-tight">Memory King</h1>
+    <p class="text-[#b9caca] text-lg leading-relaxed max-w-2xl">
+      A Flutter-based mobile card-matching game with real-time Firebase backend, user authentication, profile management, and competitive leaderboard scoring.
+    </p>
+  </div>
+
+  <!-- Media placeholder -->
+  <div class="glass rounded-2xl overflow-hidden aspect-video flex items-center justify-center">
+
+      <video src="vid/Memory King.mp4" controls loop muted playsinline>
+        Your browser does not support the video tag.
+      </video>
+  
+  </div>
+
+  <!-- Overview -->
+  <div class="glass rounded-2xl p-8 space-y-4">
+    <h2 class="text-xl font-bold text-[#e9feff] border-b border-[#3a494a] pb-3 uppercase mono tracking-widest text-sm text-[#00f5ff]">Project Overview</h2>
+    <p class="text-[#b9caca] leading-relaxed">
+      Memory King challenges players to match cards as quickly and accurately as possible across progressively harder difficulty levels. The app reflects a full-stack mobile architecture: a Flutter UI layer communicates with Firebase Authentication for login/signup, Firestore for real-time score storage, and Firebase Analytics for user behaviour tracking.
+    </p>
+    <p class="text-[#b9caca] leading-relaxed">
+      Built as the final project for the Mobile Application Development course at Princess Sumaya University for Technology.
+    </p>
+  </div>
+
+  <!-- Features -->
+  <div class="glass rounded-2xl p-8 space-y-4">
+    <h2 class="mono text-sm text-[#00f5ff] uppercase tracking-widest border-b border-[#3a494a] pb-3">Implemented Features</h2>
+    <div class="grid md:grid-cols-2 gap-3">
+      <div class="flex items-start gap-3 p-3 bg-[#1b2021] rounded-xl">
+        <span class="material-symbols-outlined text-[#00f5ff] text-sm mt-0.5">check_circle</span>
+        <div><p class="font-semibold text-sm text-[#dfe3e4]">Firebase Authentication</p><p class="text-xs text-[#849495]">Login &amp; Sign-Up with form validation and error alerts</p></div>
+      </div>
+      <div class="flex items-start gap-3 p-3 bg-[#1b2021] rounded-xl">
+        <span class="material-symbols-outlined text-[#00f5ff] text-sm mt-0.5">check_circle</span>
+        <div><p class="font-semibold text-sm text-[#dfe3e4]">Firestore CRUD</p><p class="text-xs text-[#849495]">Game scores saved, read, and updated in real time</p></div>
+      </div>
+      <div class="flex items-start gap-3 p-3 bg-[#1b2021] rounded-xl">
+        <span class="material-symbols-outlined text-[#00f5ff] text-sm mt-0.5">check_circle</span>
+        <div><p class="font-semibold text-sm text-[#dfe3e4]">User Profile Management</p><p class="text-xs text-[#849495]">Editable profile with stats, avatar, and image upload</p></div>
+      </div>
+      <div class="flex items-start gap-3 p-3 bg-[#1b2021] rounded-xl">
+        <span class="material-symbols-outlined text-[#00f5ff] text-sm mt-0.5">check_circle</span>
+        <div><p class="font-semibold text-sm text-[#dfe3e4]">Firebase Analytics</p><p class="text-xs text-[#849495]">Monitors user activity and session behaviour</p></div>
+      </div>
+      <div class="flex items-start gap-3 p-3 bg-[#1b2021] rounded-xl">
+        <span class="material-symbols-outlined text-[#00f5ff] text-sm mt-0.5">check_circle</span>
+        <div><p class="font-semibold text-sm text-[#dfe3e4]">Media Upload &amp; Display</p><p class="text-xs text-[#849495]">Supports image upload for profile customisation</p></div>
+      </div>
+      <div class="flex items-start gap-3 p-3 bg-[#1b2021] rounded-xl">
+        <span class="material-symbols-outlined text-[#00f5ff] text-sm mt-0.5">check_circle</span>
+        <div><p class="font-semibold text-sm text-[#dfe3e4]">Full Game Demo</p><p class="text-xs text-[#849495]">Complete, functional app demonstrated end-to-end</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tech Stack -->
+  <div class="glass rounded-2xl p-8 space-y-4">
+    <h2 class="mono text-sm text-[#00f5ff] uppercase tracking-widest border-b border-[#3a494a] pb-3">Tech Stack</h2>
+    <div class="flex flex-wrap gap-2">
+      <span class="px-3 py-1 bg-[#e9feff]/10 text-[#e9feff] border border-[#e9feff]/20 rounded-md text-xs mono">Flutter</span>
+      <span class="px-3 py-1 bg-[#e9feff]/10 text-[#e9feff] border border-[#e9feff]/20 rounded-md text-xs mono">Dart</span>
+      <span class="px-3 py-1 bg-[#e9feff]/10 text-[#e9feff] border border-[#e9feff]/20 rounded-md text-xs mono">Firebase Auth</span>
+      <span class="px-3 py-1 bg-[#e9feff]/10 text-[#e9feff] border border-[#e9feff]/20 rounded-md text-xs mono">Cloud Firestore</span>
+      <span class="px-3 py-1 bg-[#e9feff]/10 text-[#e9feff] border border-[#e9feff]/20 rounded-md text-xs mono">Firebase Analytics</span>
+      <span class="px-3 py-1 bg-[#e9feff]/10 text-[#e9feff] border border-[#e9feff]/20 rounded-md text-xs mono">Firebase Storage</span>
+    </div>
+  </div>
+  <!-- Credits -->
+  <div class="text-center py-6 border-t border-[#3a494a]">
+    <p class="text-[#849495] text-sm mono">Final Project · Mobile Application Development</p>
+    <p class="text-[#849495] text-sm mono">Princess Sumaya University for Technology</p>
+  </div>
+
+</main>
+</body>
+</html>
